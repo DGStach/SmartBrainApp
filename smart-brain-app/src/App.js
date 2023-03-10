@@ -1,3 +1,7 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Tilt from 'react-parallax-tilt';
+
 import logo from './logo.svg';
 import './App.css';
 
