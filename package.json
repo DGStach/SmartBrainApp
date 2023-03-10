@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "particles-bg": "^2.5.5",
+    "react-parallax-tilt": "^1.7.112"
+  }
+}
