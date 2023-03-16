@@ -5,12 +5,14 @@ import Logo from "./components/Logo/Logo";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
 import Rank from "./components/Rank/Rank";
 import ParticlesBg from 'particles-bg'
+import FaceRecognition from "./components/FaceRecognition/FaceRecognition"
+
 
 const PAT = 'abb9da9a0fbe4790be73ebbc9a135aed';
 const USER_ID = 'otiu4hjtbvkm';
 const APP_ID = 'test';
-//const MODEL_VERSION_ID = 'aa7f35c01e0642fda5cf400f543e7c40';
 const IMAGE_URL = "https://samples.clarifai.com/metro-north.jpg";
+
 
 const raw = JSON.stringify({
     "user_app_id": {
@@ -47,15 +49,16 @@ class App extends Component {
         super();
         this.state = {
             input: '',
+            imageUrl: '',
         }
     }
 
     onInputChange = (event) => {
-        console.log(event.target.value);
+        this.setState({input: event.target.value})
     }
 
     onButtonSubmit = () => {
-     console.log("yee")
+     this.setState({imageUrl: this.state.input})
     }
 
     render() {
@@ -69,7 +72,7 @@ class App extends Component {
                     onButtonSubmit={this.onButtonSubmit}
                 />
                 <ParticlesBg type="cobweb" num={300} bg={true} color="#EEEEEE"/>
-                {/* <FaceRecognition/>*/}
+                 <FaceRecognition imageUrl = {this.state.imageUrl}/>
             </div>
         );
     }
