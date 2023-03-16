@@ -37,7 +37,7 @@ const requestOptions = {
     body: raw
 };
 
-fetch("https://api.clarifai.com/v2/models/" + 'face-detection' + "/outputs", requestOptions)
+fetch("https://api.clarifai.com/v2/models/face-detection/outputs", requestOptions)
     .then(response => response.json())
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
