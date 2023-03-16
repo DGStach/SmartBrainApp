@@ -7,7 +7,6 @@ import Rank from "./components/Rank/Rank";
 import ParticlesBg from 'particles-bg'
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition"
 
-
 const clarifaiResponse = (imageUrl) => {
     const PAT = 'abb9da9a0fbe4790be73ebbc9a135aed';
     const USER_ID = 'otiu4hjtbvkm';
