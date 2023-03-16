@@ -6,23 +6,56 @@ import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
 import Rank from "./components/Rank/Rank";
 import ParticlesBg from 'particles-bg'
 
+const PAT = 'abb9da9a0fbe4790be73ebbc9a135aed';
+const USER_ID = 'otiu4hjtbvkm';
+const APP_ID = 'test';
+//const MODEL_VERSION_ID = 'aa7f35c01e0642fda5cf400f543e7c40';
+const IMAGE_URL = "https://samples.clarifai.com/metro-north.jpg";
+
+const raw = JSON.stringify({
+    "user_app_id": {
+        "user_id": USER_ID,
+        "app_id": APP_ID
+    },
+    "inputs": [
+        {
+            "data": {
+                "image": {
+                    "url": IMAGE_URL
+                }
+            }
+        }
+    ]
+});
+
+const requestOptions = {
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Key ' + PAT
+    },
+    body: raw
+};
+
+fetch("https://api.clarifai.com/v2/models/" + 'face-detection' + "/outputs", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log("wynik" + result))
+    .catch(error => console.log('error', error));
 
 class App extends Component {
-
     constructor() {
         super();
         this.state = {
             input: '',
         }
-
     }
 
     onInputChange = (event) => {
         console.log(event.target.value);
     }
 
-    onButtonSubmit = (event) => {
-        console.log('click');
+    onButtonSubmit = () => {
+     console.log("yee")
     }
 
     render() {
