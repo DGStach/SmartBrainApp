@@ -8,41 +8,39 @@ import ParticlesBg from 'particles-bg'
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition"
 
 
-const PAT = 'abb9da9a0fbe4790be73ebbc9a135aed';
-const USER_ID = 'otiu4hjtbvkm';
-const APP_ID = 'test';
-const IMAGE_URL = "https://samples.clarifai.com/metro-north.jpg";
+const clarifaiResponse = (imageUrl) => {
+    const PAT = 'abb9da9a0fbe4790be73ebbc9a135aed';
+    const USER_ID = 'otiu4hjtbvkm';
+    const APP_ID = 'test';
+    const IMAGE_URL = imageUrl;
 
-
-const raw = JSON.stringify({
-    "user_app_id": {
-        "user_id": USER_ID,
-        "app_id": APP_ID
-    },
-    "inputs": [
-        {
-            "data": {
-                "image": {
-                    "url": IMAGE_URL
+    const raw = JSON.stringify({
+        "user_app_id": {
+            "user_id": USER_ID,
+            "app_id": APP_ID
+        },
+        "inputs": [
+            {
+                "data": {
+                    "image": {
+                        "url": IMAGE_URL
+                    }
                 }
             }
-        }
-    ]
-});
+        ]
+    });
 
-const requestOptions = {
-    method: 'POST',
-    headers: {
-        'Accept': 'application/json',
-        'Authorization': 'Key ' + PAT
-    },
-    body: raw
-};
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Key ' + PAT
+        },
+        body: raw
+    };
 
-fetch("https://api.clarifai.com/v2/models/face-detection/outputs", requestOptions)
-    .then(response => response.json())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
+    return requestOptions
+}
 
 class App extends Component {
     constructor() {
@@ -59,8 +57,11 @@ class App extends Component {
 
     onButtonSubmit = () => {
      this.setState({imageUrl: this.state.input})
+        fetch("https://api.clarifai.com/v2/models/face-detection/outputs", clarifaiResponse(this.state.input))
+            .then(response => response.json())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
     }
-
     render() {
         return (
             <div className="App">
