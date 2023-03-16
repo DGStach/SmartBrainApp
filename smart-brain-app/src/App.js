@@ -38,8 +38,8 @@ const requestOptions = {
 };
 
 fetch("https://api.clarifai.com/v2/models/" + 'face-detection' + "/outputs", requestOptions)
-    .then(response => response.text())
-    .then(result => console.log("wynik" + result))
+    .then(response => response.json())
+    .then(result => console.log(result))
     .catch(error => console.log('error', error));
 
 class App extends Component {
