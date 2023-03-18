@@ -47,7 +47,7 @@ class App extends Component {
         this.state = {
             input: '',
             imageUrl: '',
-            Coordinates: {},
+            box: {},
         }
     }
 
@@ -57,6 +57,7 @@ class App extends Component {
         const width = Number(image.width);
         const height = Number(image.height);
         console.log("height" + height,"width" + width)
+
         return {
             leftCol: faceSquare.left_col * width,
             topRow: faceSquare.top_row * height,
