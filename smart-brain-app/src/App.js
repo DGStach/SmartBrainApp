@@ -6,6 +6,7 @@ import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
 import Rank from "./components/Rank/Rank";
 import ParticlesBg from 'particles-bg'
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition"
+import Signin from "./components/Signin/Signin";
 
 const clarifaiResponse = (imageUrl) => {
     const PAT = 'abb9da9a0fbe4790be73ebbc9a135aed';
@@ -87,6 +88,7 @@ class App extends Component {
         return (
             <div className="App">
                 <Navigation/>
+                <Signin/>
                 <Logo/>
                 <Rank/>
                 <ImageLinkForm
