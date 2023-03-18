@@ -1,11 +1,11 @@
 import React from "react";
 
-const Navigation = () => {
+const Navigation = ({onRouteChange}) => {
     return (
-        <nav style = {{display:"flex", justifyContent:"flex-end"}}>
-            <p className=' link dim black underline pa3 pointer'>Sign Out</p>
-        </nav>
+            <div style={{display: "flex", justifyContent: "flex-end"}}>
+                <p onClick={()=>{onRouteChange('signin')}}
+                    className='link dim black underline pa3 pointer'>Sign Out</p>
+            </div>
     );
 }
-
 export default Navigation

@@ -30,7 +30,7 @@ const clarifaiResponse = (imageUrl) => {
         ]
     });
 
-    const requestOptions= {
+    const requestOptions = {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -49,15 +49,16 @@ class App extends Component {
             input: '',
             imageUrl: '',
             box: {},
+            route: ''
         }
     }
 
-    Coordinates = (data) =>{
-       const faceSquare = data.outputs[0].data.regions[0].region_info.bounding_box
+    Coordinates = (data) => {
+        const faceSquare = data.outputs[0].data.regions[0].region_info.bounding_box
         const image = document.getElementById('inputImage');
         const width = Number(image.width);
         const height = Number(image.height);
-        console.log("height" + height,"width" + width)
+        console.log("height" + height, "width" + width)
 
         return {
             leftCol: faceSquare.left_col * width,
@@ -69,7 +70,7 @@ class App extends Component {
 
     DisplayFaceBox = (box) => {
         console.log(box)
-        this.setState({box:box});
+        this.setState({box: box});
     }
 
     onInputChange = (event) => {
@@ -77,26 +78,37 @@ class App extends Component {
     }
 
     onButtonSubmit = () => {
-     this.setState({imageUrl: this.state.input})
+        this.setState({imageUrl: this.state.input})
         fetch("https://api.clarifai.com/v2/models/face-detection/outputs", clarifaiResponse(this.state.input))
             .then(response => response.json())
-            .then(response =>{this.DisplayFaceBox(this.Coordinates(response))})
+            .then(response => {
+                this.DisplayFaceBox(this.Coordinates(response))
+            })
             .catch(error => console.log('error', error));
     }
+
+     onRouteChange = (route) => {
+           this.setState({route: route});
+       }
 
     render() {
         return (
             <div className="App">
-                <Navigation/>
-                <Signin/>
-                <Logo/>
-                <Rank/>
-                <ImageLinkForm
-                    onInputChange={this.onInputChange}
-                    onButtonSubmit={this.onButtonSubmit}
-                />
                 <ParticlesBg type="cobweb" num={300} bg={true} color="#EEEEEE"/>
-                 <FaceRecognition box = {this.state.box} imageUrl = {this.state.imageUrl}/>
+                <Navigation onRouteChange={this.onRouteChange}/>
+                {this.state.route === 'signin'
+                    ? <Signin onRouteChange={this.onRouteChange}/>
+                    : <div>
+                        <Logo/>
+                        <Rank/>
+                        <ImageLinkForm
+                            onInputChange={this.onInputChange}
+                            onButtonSubmit={this.onButtonSubmit}
+                        />
+                        <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl}/>
+
+                    </div>
+                }
             </div>
         );
     }
