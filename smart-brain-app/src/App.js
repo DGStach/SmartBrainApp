@@ -7,6 +7,7 @@ import Rank from "./components/Rank/Rank";
 import ParticlesBg from 'particles-bg'
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition"
 import Signin from "./components/Signin/Signin";
+import Register from "./components/Register/Register";
 
 const clarifaiResponse = (imageUrl) => {
     const PAT = 'abb9da9a0fbe4790be73ebbc9a135aed';
@@ -49,7 +50,8 @@ class App extends Component {
             input: '',
             imageUrl: '',
             box: {},
-            route: ''
+            route: '',
+            isSignedIn:false,
         }
     }
 
@@ -69,7 +71,6 @@ class App extends Component {
     }
 
     DisplayFaceBox = (box) => {
-        console.log(box)
         this.setState({box: box});
     }
 
@@ -84,21 +85,27 @@ class App extends Component {
             .then(response => {
                 this.DisplayFaceBox(this.Coordinates(response))
             })
-            .catch(error => console.log('error', error));
+            .catch(error => console.log
+            (error + 'error'))
     }
 
-     onRouteChange = (route) => {
-           this.setState({route: route});
-       }
+    onRouteChange = (route) => {
+        if (route === 'signin') {
+            this.setState({isSignedIn: true})
+        } else if (route === 'home') {
+            this.setState({isSignedIn: false})
+        }
+        this.setState({route: route});
+    }
 
     render() {
         return (
             <div className="App">
                 <ParticlesBg type="cobweb" num={300} bg={true} color="#EEEEEE"/>
-                <Navigation onRouteChange={this.onRouteChange}/>
-                {this.state.route === 'signin'
-                    ? <Signin onRouteChange={this.onRouteChange}/>
-                    : <div>
+                <Navigation isSignedIn={this.state.isSignedIn}
+                    onRouteChange={this.onRouteChange}/>
+                {this.state.route === 'home'
+                    ? <div>
                         <Logo/>
                         <Rank/>
                         <ImageLinkForm
@@ -106,8 +113,10 @@ class App extends Component {
                             onButtonSubmit={this.onButtonSubmit}
                         />
                         <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl}/>
-
                     </div>
+                    : (this.state.route === 'signin'
+                        ? <Signin onRouteChange={this.onRouteChange}/>
+                        : <Register onRouteChange={this.onRouteChange}/>)
                 }
             </div>
         );
