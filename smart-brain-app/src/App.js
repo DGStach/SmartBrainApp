@@ -50,8 +50,8 @@ class App extends Component {
             input: '',
             imageUrl: '',
             box: {},
-            route: '',
-            isSignedIn:false,
+            route: 'signin',
+            isSignedIn:true,
         }
     }
 
@@ -60,7 +60,6 @@ class App extends Component {
         const image = document.getElementById('inputImage');
         const width = Number(image.width);
         const height = Number(image.height);
-        console.log("height" + height, "width" + width)
 
         return {
             leftCol: faceSquare.left_col * width,
@@ -99,12 +98,13 @@ class App extends Component {
     }
 
     render() {
+        const {isSignedIn, box, route, imageUrl} = this.state;
         return (
             <div className="App">
                 <ParticlesBg type="cobweb" num={300} bg={true} color="#EEEEEE"/>
-                <Navigation isSignedIn={this.state.isSignedIn}
+                <Navigation isSignedIn={isSignedIn}
                     onRouteChange={this.onRouteChange}/>
-                {this.state.route === 'home'
+                {route === 'home'
                     ? <div>
                         <Logo/>
                         <Rank/>
@@ -112,12 +112,12 @@ class App extends Component {
                             onInputChange={this.onInputChange}
                             onButtonSubmit={this.onButtonSubmit}
                         />
-                        <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl}/>
+                        <FaceRecognition box={box} imageUrl={imageUrl}/>
                     </div>
-                    : (this.state.route === 'signin'
+                    : (route === 'signin'
                         ? <Signin onRouteChange={this.onRouteChange}/>
-                        : <Register onRouteChange={this.onRouteChange}/>)
-                }
+                        : <Register onRouteChange={this.onRouteChange}/>
+                )}
             </div>
         );
     }
