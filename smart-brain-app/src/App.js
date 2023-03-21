@@ -54,7 +54,6 @@ class App extends Component {
             isSignedIn:true,
         }
     }
-
     Coordinates = (data) => {
         const faceSquare = data.outputs[0].data.regions[0].region_info.bounding_box
         const image = document.getElementById('inputImage');
