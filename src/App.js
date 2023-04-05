@@ -9,6 +9,8 @@ import FaceRecognition from "./components/FaceRecognition/FaceRecognition"
 import Signin from "./components/Signin/Signin";
 import Register from "./components/Register/Register";
 
+//https://no.wikipedia.org/wiki/Brad_Pitt#/media/Fil:Brad_Pitt_2019_by_Glenn_Francis.jpg
+
 const clarifaiResponse = (imageUrl) => {
     const PAT = 'abb9da9a0fbe4790be73ebbc9a135aed';
     const USER_ID = 'otiu4hjtbvkm';
@@ -54,6 +56,7 @@ class App extends Component {
             isSignedIn:true,
         }
     }
+
     Coordinates = (data) => {
         const faceSquare = data.outputs[0].data.regions[0].region_info.bounding_box
         const image = document.getElementById('inputImage');
