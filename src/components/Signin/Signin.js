@@ -17,6 +17,7 @@ class Signin extends React.Component {
         this.setState({signInPassword: event.target.value})
     }
 
+
     onSubmitSignIn = () => {
         fetch('http://localhost:3000/signin', {
             method: 'post',
@@ -26,6 +27,14 @@ class Signin extends React.Component {
                 password: this.state.signInPassword
             })
         })
+            .then(res => res.json())
+            .then(user => {
+                console.log(user.id);
+                if (user.id){
+                    this.props.loadUser(user)
+                    this.props.onRouteChange('home')
+                }
+            })
     }
 
     render() {
@@ -61,7 +70,7 @@ class Signin extends React.Component {
                             <input
                                 onClick={this.onSubmitSignIn}
                                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
-                                type="submit"
+                                type="button"
                                 value="Sign in"/>
                         </div>
                         <div className="lh-copy mt3">
