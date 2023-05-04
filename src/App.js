@@ -51,8 +51,8 @@ class App extends Component {
             imageUrl: '',
             box: {},
             route: 'signin',
-            isSignedIn:true,
-            user:{
+            isSignedIn: true,
+            user: {
                 id: '',
                 name: '',
                 email: '',
@@ -62,22 +62,17 @@ class App extends Component {
         }
     }
 
-    loadUser=(data)=>{
-        this.setState( {user:{
-            id: data.id,
+    loadUser = (data) => {
+        this.setState({
+            user: {
+                id: data.id,
                 name: data.name,
                 email: data.email,
                 entries: data.entries,
                 joined: data.joined
-        }})
+            }
+        })
     }
-
-/*    componentDidMount()
-    {
-        fetch("http://localhost:3000/")
-            .then(response => response.json())
-            .then(console.log)
-    }*/
 
     Coordinates = (data) => {
         const faceSquare = data.outputs[0].data.regions[0].region_info.bounding_box
@@ -116,8 +111,8 @@ class App extends Component {
                         })
                     })
                         .then(res => res.json())
-                        .then(count =>{
-                            this.setState(Object.assign(this.state.user, {entries:count}))
+                        .then(count => {
+                            this.setState(Object.assign(this.state.user, {entries: count}))
                         })
                 }
                 this.DisplayFaceBox(this.Coordinates(response))
@@ -141,11 +136,11 @@ class App extends Component {
             <div className="App">
                 <ParticlesBg type="cobweb" num={40} bg={true} v={1000} color="#EEEEEE"/>
                 <Navigation isSignedIn={isSignedIn}
-                    onRouteChange={this.onRouteChange}/>
+                            onRouteChange={this.onRouteChange}/>
                 {route === 'home'
                     ? <div>
                         <Logo/>
-                        <Rank name = {this.state.user.name} entries = {this.state.user.entries} />
+                        <Rank name={this.state.user.name} entries={this.state.user.entries}/>
                         <ImageLinkForm
                             onInputChange={this.onInputChange}
                             onButtonSubmit={this.onButtonSubmit}
@@ -153,9 +148,9 @@ class App extends Component {
                         <FaceRecognition box={box} imageUrl={imageUrl}/>
                     </div>
                     : (route === 'signin'
-                        ? <Signin loadUser = {this.loadUser} onRouteChange={this.onRouteChange}/>
-                        : <Register loadUser = {this.loadUser} onRouteChange={this.onRouteChange}/>
-                )}
+                            ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+                            : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+                    )}
             </div>
         );
     }

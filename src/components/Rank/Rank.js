@@ -2,7 +2,6 @@ import React from 'react';
 
 
  const Rank = ({name, entries}) => {
-console.log(entries, name);
     return (
         <div>
             <div className='white f3'>
