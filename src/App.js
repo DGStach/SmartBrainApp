@@ -42,24 +42,24 @@ const clarifaiResponse = (imageUrl) => {
 
     return requestOptions
 }
-
+const initialstate = {
+    input: '',
+    imageUrl: '',
+    box: {},
+    route: 'signin',
+    isSignedIn: true,
+    user: {
+        id: '',
+        name: '',
+        email: '',
+        entries: 0,
+        joined: ''
+    }
+}
 class App extends Component {
     constructor() {
         super();
-        this.state = {
-            input: '',
-            imageUrl: '',
-            box: {},
-            route: 'signin',
-            isSignedIn: true,
-            user: {
-                id: '',
-                name: '',
-                email: '',
-                entries: 0,
-                joined: ''
-            }
-        }
+        this.state = initialstate
     }
 
     loadUser = (data) => {
@@ -114,6 +114,7 @@ class App extends Component {
                         .then(count => {
                             this.setState(Object.assign(this.state.user, {entries: count}))
                         })
+                        .catch(console.log)
                 }
                 this.DisplayFaceBox(this.Coordinates(response))
             })
