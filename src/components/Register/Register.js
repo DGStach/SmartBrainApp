@@ -6,7 +6,8 @@ class Register extends React.Component {
         this.state = {
             email: "",
             password: "",
-            name: ""
+            name: "",
+            entries: "",
         }
     }
     onNameChange = (event) => {
@@ -29,12 +30,12 @@ class Register extends React.Component {
             body: JSON.stringify({
                 email: this.state.email,
                 password: this.state.password,
-                name: this.state.name
+                name: this.state.name,
+                entries: this.state.entries
             })
         })
             .then(res => res.json())
             .then(user=> {
-                console.log(user);
                 if (user){
                     this.props.loadUser(user)
                     this.props.onRouteChange('home')

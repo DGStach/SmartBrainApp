@@ -8,7 +8,7 @@ import React from 'react';
                 {`${name}, your current rank is `}
             </div>
             <div className='white f1'>
-                {entries.entries}
+                {entries}
             </div>
         </div>
     )
