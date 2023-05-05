@@ -44,6 +44,7 @@ class Register extends React.Component {
     }
 
     render(){
+       const {LoginMessage} = this.state
     return(
         <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
             <main className="pa4 black-80">
@@ -87,6 +88,12 @@ class Register extends React.Component {
                             type="button"
                             value="Register"
                         />
+                    </div>
+                    <div className="mt3">
+                        {/*//place for login message */}
+                        <label className="db fw6 lh-copy f6" htmlFor="email-address"></label>
+                        <p className=" pa2 input-reset bg-transparent"
+                        >{LoginMessage}</p>
                     </div>
                 </form>
             </main>
