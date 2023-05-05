@@ -43,25 +43,25 @@ const clarifaiResponse = (imageUrl) => {
     return requestOptions
 }
 
-
+const initialState = {
+    input: '',
+    imageUrl: '',
+    box: {},
+    route: 'signin',
+    isSignedIn: true,
+    user: {
+        id: '',
+        name: '',
+        email: '',
+        entries:'',
+        joined: ''
+    }
+}
 
     class App extends Component {
         constructor() {
             super();
-            this.state = {
-                input: '',
-                imageUrl: '',
-                box: {},
-                route: 'signin',
-                isSignedIn: true,
-                user: {
-                    id: '',
-                    name: '',
-                    email: '',
-                    entries: 0,
-                    joined: ''
-                }
-            }
+            this.state = initialState
         }
 
         loadUser = (data) => {
@@ -126,7 +126,7 @@ const clarifaiResponse = (imageUrl) => {
 
         onRouteChange = (route) => {
             if (route === 'signin') {
-                this.setState({isSignedIn: true})
+                this.setState(initialState)
             } else if (route === 'home') {
                 this.setState({isSignedIn: false})
             }
@@ -137,7 +137,7 @@ const clarifaiResponse = (imageUrl) => {
             const {isSignedIn, box, route, imageUrl} = this.state;
             return (
                 <div className="App">
-                    <ParticlesBg type="cobweb" num={40} bg={true} v={1000} color="#EEEEEE"/>
+                    <ParticlesBg type="cobweb" num={100} bg={true} v={800} color="#EEEEEE"/>
                     <Navigation isSignedIn={isSignedIn}
                                 onRouteChange={this.onRouteChange}/>
                     {route === 'home'
