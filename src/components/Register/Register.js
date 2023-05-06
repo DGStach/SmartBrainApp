@@ -48,7 +48,7 @@ class Register extends React.Component {
     return(
         <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
             <main className="pa4 black-80">
-                <form className="measure">
+                <form className="measure"  onSubmit={this.onSubmitSignIn}>
                     <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
                         <legend className="f1 fw6 ph0 mh0">Register</legend>
                         <div className="mt3">
@@ -78,16 +78,19 @@ class Register extends React.Component {
                                    type="password"
                                    name="password"
                                    id="password"
+                                    minLength="8"
+                                    maxLength="20"
+                                    pattern="^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$"
+                                    title="min password length is 8 characters, at least one lowercase and uppercase and one character from set @#$%^&+= "
                                     onChange = {this.onPasswordChange}/>
                         </div>
                     </fieldset>
                     <div className="">
-                        <input
-                            onClick={this.onSubmitSignIn}
+                        <button
                             className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
-                            type="button"
+                            type="submit"
                             value="Register"
-                        />
+                        >Register</button>
                     </div>
                     <div className="mt3">
                         {/*//place for login message */}
