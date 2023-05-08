@@ -1,4 +1,5 @@
 import React from "react";
+import "../../App.css"
 
 class Register extends React.Component {
     constructor(props) {
@@ -8,10 +9,11 @@ class Register extends React.Component {
             password: "",
             name: "",
             entries: "",
-            errMessage:''
+            errMessage: ''
 
         }
     }
+
     onNameChange = (event) => {
         this.setState({name: event.target.value})
     }
@@ -26,7 +28,7 @@ class Register extends React.Component {
 
 
     onSubmitSignIn = (e) => {
-       // debugger
+        // debugger
         e.preventDefault();
         fetch('http://localhost:3000/register', {
             method: 'post',
@@ -41,78 +43,92 @@ class Register extends React.Component {
         })
 
             .then(res => res.json())
-            .then(user=> {
-                if (user.id){
+            .then(user => {
+                if (user.id) {
                     this.props.loadUser(user)
                     this.props.onRouteChange('home')
-                }
-                else {
+                } else {
                     this.setState({errMessage: user})
                 }
             })
     }
 
-    render(){
-       const {errMessage} = this.state
-    return(
-        <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
-            <main className="pa4 black-80">
-                <form className="measure" onSubmit={this.onSubmitSignIn}>
-                    <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-                        <legend className="f1 fw6 ph0 mh0">Register</legend>
-                        <div className="mt3">
-                            <label className="db fw6 lh-copy f6" htmlFor="email-address">Name</label>
+    passwordSeeFun = () => {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+    render() {
+        const {passwordSeeFun} = this.state
+        return (
+            <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
+                <main className="pa4 black-80">
+                    <form className="measure" onSubmit={this.onSubmitSignIn}>
+                        <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
+                            <legend className="f1 fw6 ph0 mh0">Register</legend>
+                            <div className="mt3">
+                                <label className="db fw6 lh-copy f6" htmlFor="email-address">Name</label>
+                                <input
+                                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                                    type="text"
+                                    name="name"
+                                    id="name"
+                                    onChange={this.onNameChange}
+                                />
+                            </div>
+                            <div className="mt3">
+                                <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
+                                <input
+                                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                                    type="email"
+                                    name="email-address"
+                                    id="email-address"
+                                    onChange={this.onEmailChange}
+                                />
+                            </div>
+                            <div className="mv3">
+                                <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
+                                <input
+                                    className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                                    type="password"
+                                    name="password"
+                                    id="password"
+                                    minLength="8"
+                                    maxLength="20"
+                                    pattern="^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$"
+                                    title="min password length is 8 characters, at least one lowercase and uppercase and one character from set @#$%^&+= "
+                                    onChange={this.onPasswordChange}/>
+                                <div style={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    paddingTop: 5
+                                }}>
+                                    <label className="db fw6 lh-copy f6" htmlFor="password">Show Password</label>
+                                    <input
+                                        className="cheeckBox"
+                                        type="checkbox"
+                                        onClick={() => this.passwordSeeFun()}
+                                        style={{marginLeft: 5}}
+                                    />
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div className="">
                             <input
-                                className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                type="text"
-                                name="name"
-                                id="name"
-                                onChange={this.onNameChange}
+                                className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
+                                type="submit"
+                                value="Register"
                             />
                         </div>
-                        <div className="mt3">
-                            <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
-                            <input
-                                className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                type="email"
-                                name="email-address"
-                                id="email-address"
-                                onChange = {this.onEmailChange}
-                            />
-                        </div>
-                        <div className="mv3">
-                            <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
-                            <input
-                                className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                   type="password"
-                                   name="password"
-                                   id="password"
-                                 minLength="8"
-                                 maxLength="20"
-                                 pattern="^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$"
-                                 title="min password length is 8 characters, at least one lowercase and uppercase and one character from set @#$%^&+= "
-                                 onChange = {this.onPasswordChange}/>
-                        </div>
-                    </fieldset>
-                    <div className="">
-                        <input
-                            //onClick={this.onSubmitSignIn}
-                            className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
-                            //type="button"
-                            type="submit"
-                            value="Register"
-                        />
-                    </div>
-                    <div className="mt3">
-                        {/*//place for login message */}
-                        <label className="db fw6 lh-copy f6" htmlFor="email-address"></label>
-                        <p className=" pa2 input-reset bg-transparent"
-                        >{errMessage}</p>
-                    </div>
-                </form>
-            </main>
-        </article>
-    );
+                    </form>
+                </main>
+            </article>
+        );
     }
 }
 

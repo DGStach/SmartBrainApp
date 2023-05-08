@@ -1,7 +1,21 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
-.center{
-  display: flex;
-  justify-content: center;
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.cheeckBox {
+    width: 15px;
+    height: 15px;
+    margin: 5px;
+/*    border: 1px solid rgba(1,1,1,0.5);
+!*  !*
+  -webkit-appearance: none;
+  *!
+    -moz-appearance: none;*!
+    background: rgba(0,0,0,0);*/
+    cursor: pointer;
 }
