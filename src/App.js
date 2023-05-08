@@ -43,13 +43,13 @@ class App extends Component {
     }
 
     Coordinates = (data) => {
-       // const faceSquare = data.outputs[0].data.regions[0].region_info.bounding_box
+        // const faceSquare = data.outputs[0].data.regions[0].region_info.bounding_box
         const image = document.getElementById('inputImage');
         const width = Number(image.width);
         const height = Number(image.height);
         const box = []
 
-        for (const value of Object.values(data.outputs[0].data.regions)){
+        for (const value of Object.values(data.outputs[0].data.regions)) {
             let faceSquare = value.region_info.bounding_box;
             box.push({
                 leftCol: faceSquare.left_col * width,
@@ -82,7 +82,7 @@ class App extends Component {
         })
             .then(response => response.json())
             .then(response => {
-                if (response) {
+                if (response.status.description === "Ok") {
                     fetch('http://localhost:3000/image', {
                         method: 'put',
                         headers: {'Content-Type': 'application/json'},
