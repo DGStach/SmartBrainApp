@@ -12,7 +12,7 @@ import Register from "./components/Register/Register";
 const initialState = {
     input: '',
     imageUrl: '',
-    box: {},
+    box: [],
     route: 'signin',
     isSignedIn: true,
     user: {
@@ -47,13 +47,15 @@ class App extends Component {
         const image = document.getElementById('inputImage');
         const width = Number(image.width);
         const height = Number(image.height);
-
-        return {
+        const box = []
+            box.push({
             leftCol: faceSquare.left_col * width,
             topRow: faceSquare.top_row * height,
             rightCol: width - (faceSquare.right_col * width),
             bottomRow: height - (faceSquare.bottom_row * height)
-        }
+        });
+
+        return box
     }
 
     DisplayFaceBox = (box) => {
@@ -121,7 +123,6 @@ class App extends Component {
                             onButtonSubmit={this.onButtonSubmit}
                         />
                         <FaceRecognition box={box} imageUrl={imageUrl}/>
-                        {/*//<FaceRecognitionBox box={box}/>*/}
                     </div>
                     : (route === 'signin'
                             ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
