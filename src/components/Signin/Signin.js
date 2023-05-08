@@ -35,6 +35,14 @@ class Signin extends React.Component {
                 }
             })
     }
+    passwordSeeFun = () => {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
 
     render() {
         const {onRouteChange} = this.props;
@@ -62,6 +70,20 @@ class Signin extends React.Component {
                                     name="password"
                                     id="password"
                                     autoComplete="on"
+                                />
+                            </div>
+                            <div style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                paddingTop: 5
+                            }}>
+                                <label className="db fw6 lh-copy f6" htmlFor="password">Show Password</label>
+                                <input
+                                    className="cheeckBox input-reset ba bg-transparent"
+                                    type="checkbox"
+                                    onClick={() => this.passwordSeeFun()}
+                                    style={{marginLeft: 5}}
                                 />
                             </div>
                         </fieldset>

@@ -110,7 +110,7 @@ class Register extends React.Component {
                                 }}>
                                     <label className="db fw6 lh-copy f6" htmlFor="password">Show Password</label>
                                     <input
-                                        className="cheeckBox"
+                                        className="cheeckBox input-reset ba bg-transparent"
                                         type="checkbox"
                                         onClick={() => this.passwordSeeFun()}
                                         style={{marginLeft: 5}}
