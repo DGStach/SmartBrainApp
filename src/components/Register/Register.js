@@ -102,20 +102,20 @@ class Register extends React.Component {
                                     pattern="^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$"
                                     title="min password length is 8 characters, at least one lowercase and uppercase and one character from set @#$%^&+= "
                                     onChange={this.onPasswordChange}/>
-                                <div style={{
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    paddingTop: 5
-                                }}>
-                                    <label className="db fw6 lh-copy f6" htmlFor="password">Show Password</label>
-                                    <input
-                                        className="cheeckBox input-reset ba bg-transparent"
-                                        type="checkbox"
-                                        onClick={() => this.passwordSeeFun()}
-                                        style={{marginLeft: 5}}
-                                    />
-                                </div>
+                            </div>
+                            <div style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                paddingTop: 5
+                            }}>
+                                <label className="db fw6 lh-copy f6" htmlFor="password">Show Password</label>
+                                <input
+                                    className="cheeckBox input-reset ba bg-transparent"
+                                    type="checkbox"
+                                    onClick={() => this.passwordSeeFun()}
+                                    style={{marginLeft: 5}}
+                                />
                             </div>
                         </fieldset>
                         <div className="">
