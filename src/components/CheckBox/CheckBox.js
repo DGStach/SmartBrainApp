@@ -10,7 +10,6 @@ const CheckBox = () => {
                 id="checkbox_id"
             />
             <label for="checkbox_id" className="db fw6 lh-copy f6" htmlFor="password">Show Password</label>
-
         </div>
     )
 }

@@ -65,7 +65,7 @@ class Signin extends React.Component {
                                 <input
                                     onChange={this.onPasswordChange}
                                     className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                    type={this.state.passType}
+                                    type={passType}
                                     name="password"
                                     id="password"
                                     autoComplete="on"
