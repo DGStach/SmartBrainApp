@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import {getKeyEventProps} from "@testing-library/user-event/dist/keyboard/getEventProps";
 import passwordSeeFun from "../../UtilCommon"
+import "./PasswordBox.css"
 class PasswordBox extends Component {
     constructor() {
         super ();
@@ -18,7 +18,6 @@ class PasswordBox extends Component {
                     className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                     type={passType}
                     name="password"
-                    id="password"
                     minLength="8"
                     maxLength="20"
                     pattern="^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$"

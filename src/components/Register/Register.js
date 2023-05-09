@@ -1,9 +1,7 @@
 import React from "react";
 import "../../App.css";
-import passwordSeeFun from "../../UtilCommon";
-import CheckBox from "../CheckBox/CheckBox";
-import checkBox from "../CheckBox/CheckBox";
 import PasswordBox from "../PasswordBox/PasswordBox";
+
 class Register extends React.Component {
     constructor(props) {
         super(props);
@@ -56,7 +54,6 @@ class Register extends React.Component {
     }
 
     render() {
-        const {passType} = this.state
         return (
             <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
                 <main className="pa4 black-80">

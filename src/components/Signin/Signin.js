@@ -1,14 +1,12 @@
 import React from "react";
-import passwordSeeFun from "../../UtilCommon";
-import CheckBox from "../CheckBox/CheckBox";
+import PasswordBox from "../PasswordBox/PasswordBox";
 
 class Signin extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             signInEmail: "",
-            signInPassword: "",
-            passType: "password"
+            signInPassword: ""
         }
     }
 
@@ -39,7 +37,6 @@ class Signin extends React.Component {
     }
 
     render() {
-        const {passType} = this.state
         const {onRouteChange} = this.props;
 
         return (
@@ -58,22 +55,7 @@ class Signin extends React.Component {
                                     name="email-address"
                                     id="email-address"/>
                             </div>
-                            <div className="mv3">
-                                <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
-                                <input
-                                    onChange={this.onPasswordChange}
-                                    className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                    type={passType}
-                                    name="password"
-                                    id="password"
-                                    autoComplete="on"
-                                />
-                            </div>
-                            <div onClick={() => {
-                                this.setState({passType: passwordSeeFun(passType)})
-                            }}>
-                                <CheckBox/>
-                            </div>
+                         <PasswordBox/>
                         </fieldset>
                         <div className="">
                             <input
