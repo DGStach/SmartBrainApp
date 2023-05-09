@@ -1,6 +1,7 @@
 import React from "react";
-import "../../App.css"
-
+import "../../App.css";
+import passwordSeeFun from "../../UtilCommon";
+import CheckBox from "../CheckBox/CheckBox";
 class Register extends React.Component {
     constructor(props) {
         super(props);
@@ -9,8 +10,8 @@ class Register extends React.Component {
             password: "",
             name: "",
             entries: "",
-            errMessage: ''
-
+            errMessage: '',
+            passType: "password"
         }
     }
 
@@ -53,16 +54,8 @@ class Register extends React.Component {
             })
     }
 
-    passwordSeeFun = () => {
-        var x = document.getElementById("password");
-        if (x.type === "password") {
-            x.type = "text";
-        } else {
-            x.type = "password";
-        }
-    }
-
     render() {
+        const {passType} = this.state
         return (
             <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
                 <main className="pa4 black-80">
@@ -93,7 +86,7 @@ class Register extends React.Component {
                                 <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
                                 <input
                                     className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                    type="password"
+                                    type={this.state.passType}
                                     name="password"
                                     id="password"
                                     minLength="8"
@@ -102,19 +95,10 @@ class Register extends React.Component {
                                     title="min password length is 8 characters, at least one lowercase and uppercase and one character from set @#$%^&+= "
                                     onChange={this.onPasswordChange}/>
                             </div>
-                            <div style={{
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                paddingTop: 5
+                            <div onClick={()=>{
+                                this.setState({passType:passwordSeeFun(passType)})
                             }}>
-                                <input
-                                    className="checkBox input-reset ba bg-transparent"
-                                    type="checkbox"
-                                    onClick={() => this.passwordSeeFun()}
-                                    style={{marginLeft: 5}}
-                                />
-                                <label className="db fw6 lh-copy f6" htmlFor="password">Show Password</label>
+                                <CheckBox/>
                             </div>
                         </fieldset>
                         <div className="">
