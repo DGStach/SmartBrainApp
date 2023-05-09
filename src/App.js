@@ -58,7 +58,6 @@ class App extends Component {
                 bottomRow: height - (faceSquare.bottom_row * height)
             });
         }
-
         return box
     }
 
