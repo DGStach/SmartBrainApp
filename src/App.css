@@ -7,15 +7,17 @@
     justify-content: center;
 }
 
-.cheeckBox {
-    width: 15px;
-    height: 15px;
+.checkBox {
+    width: 14px;
+    height: 14px;
     margin: 5px;
-/*    border: 1px solid rgba(1,1,1,0.5);
-!*  !*
-  -webkit-appearance: none;
-  *!
-    -moz-appearance: none;*!
-    background: rgba(0,0,0,0);*/
     cursor: pointer;
+}
+
+.checkBox:checked{
+
+    background-image: url("https://png2.cleanpng.com/sh/42abe30c8fbd88ace31c402a7aa896db/L0KzQYm3VMA0N5d2j5H0aYP2gLBuTfNpbZRwRd9qcnuwdb72ivkua5DyiOd9ZYKwebT2jwMubZ50jNtsb36wc73wkL1ieqUyjNtsaz24cbS6hvVlPJY5S6hqNT62RIK8UMQzOWI6SqQCOUS0SYeCU8Q5NqFzf3==/kisspng-check-mark-emoji-computer-icons-emoticon-clip-art-tick-5ac3fed4e436a5.3415042115227941969348.png");
+    background-size: 13px 13px;
+    background-position: center;
+    background-color: black;
 }
