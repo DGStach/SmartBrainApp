@@ -73,7 +73,7 @@ class Signin extends React.Component {
                             </div>
                             <div onClick={() => {
                                 this.setState({passType: passwordSeeFun(passType)})
-                                }}>
+                            }}>
                                 <CheckBox/>
                             </div>
                         </fieldset>
