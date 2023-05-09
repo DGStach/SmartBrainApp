@@ -2,6 +2,8 @@ import React from "react";
 import "../../App.css";
 import passwordSeeFun from "../../UtilCommon";
 import CheckBox from "../CheckBox/CheckBox";
+import checkBox from "../CheckBox/CheckBox";
+import PasswordBox from "../PasswordBox/PasswordBox";
 class Register extends React.Component {
     constructor(props) {
         super(props);
@@ -40,7 +42,6 @@ class Register extends React.Component {
                 name: this.state.name,
                 entries: this.state.entries
             })
-
         })
 
             .then(res => res.json())
@@ -82,24 +83,7 @@ class Register extends React.Component {
                                     onChange={this.onEmailChange}
                                 />
                             </div>
-                            <div className="mv3">
-                                <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
-                                <input
-                                    className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                    type={passType}
-                                    name="password"
-                                    id="password"
-                                    minLength="8"
-                                    maxLength="20"
-                                    pattern="^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$"
-                                    title="min password length is 8 characters, at least one lowercase and uppercase and one character from set @#$%^&+= "
-                                    onChange={this.onPasswordChange}/>
-                            </div>
-                            <div onClick={()=>{
-                                this.setState({passType:passwordSeeFun(passType)})
-                            }}>
-                                <CheckBox/>
-                            </div>
+                            <PasswordBox/>
                         </fieldset>
                         <div className="">
                             <input

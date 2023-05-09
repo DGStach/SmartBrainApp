@@ -12,7 +12,6 @@ class Signin extends React.Component {
         }
     }
 
-
     onEmailChange = (event) => {
         this.setState({signInEmail: event.target.value})
     }
@@ -20,7 +19,6 @@ class Signin extends React.Component {
     onPasswordChange = (event) => {
         this.setState({signInPassword: event.target.value})
     }
-
 
     onSubmitSignIn = () => {
         fetch('http://localhost:3000/signin', {
@@ -84,6 +82,7 @@ class Signin extends React.Component {
                                 type="button"
                                 value="Sign in"/>
                         </div>
+                        <i className="fa fa-eye-slash" aria-hidden="false"></i>
                         <div className="lh-copy mt3">
                             <p onClick={() => {
                                 onRouteChange('register')
