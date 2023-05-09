@@ -1,19 +1,16 @@
 import React from "react";
+import "./CheckBox.css";
 
-const CheckBox = ()=>{
-    return(
-        <div style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            //paddingTop: 5
-        }}>
+const CheckBox = () => {
+    return (
+        <div className="CheckBoxContainer">
             <input
                 className="checkBox input-reset ba bg-transparent"
                 type="checkbox"
-                style={{marginLeft: 5}}
+                id="checkbox_id"
             />
-            <label className="db fw6 lh-copy f6" htmlFor="password">Show Password</label>
+            <label for="checkbox_id" className="db fw6 lh-copy f6" htmlFor="password">Show Password</label>
+
         </div>
     )
 }
