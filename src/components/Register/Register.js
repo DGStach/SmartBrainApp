@@ -44,6 +44,7 @@ class Register extends React.Component {
 
             .then(res => res.json())
             .then(user => {
+                console.log("In fetch on Buttom Submit")
                 if (user.id) {
                     this.props.loadUser(user)
                     this.props.onRouteChange('home')

@@ -5,7 +5,7 @@ class PasswordBox extends Component {
     constructor() {
         super ();
         this.state = {
-            passType: "text"
+            passType: "password"
         }
     }
 
