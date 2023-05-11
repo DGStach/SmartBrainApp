@@ -82,7 +82,7 @@ class App extends Component {
             .then(response => response.json())
             .then(response => {
                 if (response.status.description === "Ok") {
-                    fetch('https://smartbrainappbackend.onrender.com:3000/image', {
+                    fetch('https://smartbrainappbackend.onrender.com/image', {
                         method: 'put',
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify({
