@@ -8,6 +8,7 @@ import ParticlesBg from 'particles-bg';
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import Signin from "./components/Signin/Signin";
 import Register from "./components/Register/Register";
+import RegisterState from "./components/Register/RegisterState";
 
 const initialState = {
     input: '',
@@ -114,6 +115,7 @@ class App extends Component {
         const {isSignedIn, box, route, imageUrl} = this.state;
         return (
             <div className="App">
+                <RegisterState/>
                 <ParticlesBg type="cobweb" num={100} bg={true} v={800} color="#EEEEEE"/>
                 <Navigation isSignedIn={isSignedIn}
                             onRouteChange={this.onRouteChange}/>

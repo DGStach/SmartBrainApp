@@ -2,33 +2,23 @@ import React from "react";
 import "../../App.css";
 import PasswordBox from "../PasswordBox/PasswordBox";
 
-class Register extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: "",
-            password: "",
-            name: "",
-            entries: "",
-            errMessage: '',
-            passType: "password"
-        }
-    }
+function Register({email}) {
 
-    onNameChange = (event) => {
+
+    const onNameChange = (event) => {
         this.setState({name: event.target.value})
     }
 
-    onEmailChange = (event) => {
+    const onEmailChange = (event) => {
         this.setState({email: event.target.value})
     }
 
-    onPasswordChange = (event) => {
+    const onPasswordChange = (event) => {
         this.setState({password: event.target.value})
     }
 
 
-    onSubmitSignIn = (e) => {
+    const onSubmitSignIn = (e) => {
         // debugger
         e.preventDefault();
         fetch('https://smartbrainappbackend.onrender.com/register', {
@@ -54,8 +44,9 @@ class Register extends React.Component {
             })
     }
 
-    render() {
+
         return (
+            <div>
             <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
                 <main className="pa4 black-80">
                     <form className="measure" onSubmit={this.onSubmitSignIn}>
@@ -93,8 +84,8 @@ class Register extends React.Component {
                     </form>
                 </main>
             </article>
-        );
-    }
+            </div>
+                );
 }
 
 export default Register
