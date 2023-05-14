@@ -8,19 +8,21 @@ import ParticlesBg from 'particles-bg';
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import Signin from "./components/Signin/Signin";
 import Register from "./components/Register/Register";
+import PeopleCounter from "./components/PeopleCounter";
 
 const initialState = {
     input: '',
     imageUrl: '',
     box: [],
-    route: 'signin',
+    route: 'home',
     isSignedIn: true,
     user: {
         id: '',
         name: '',
         email: '',
         entries: '',
-        joined: ''
+        joined: '',
+        number: 3
     }
 }
 
@@ -111,7 +113,7 @@ class App extends Component {
     }
 
     render() {
-        const {isSignedIn, box, route, imageUrl} = this.state;
+        const {isSignedIn, box, route, imageUrl, Number} = this.state;
         return (
             <div className="App">
                 <ParticlesBg type="cobweb" num={100} bg={true} v={800} color="#EEEEEE"/>
@@ -121,6 +123,7 @@ class App extends Component {
                     ? <div>
                         <Logo/>
                         <Rank name={this.state.user.name} entries={this.state.user.entries}/>
+                        <PeopleCounter Number = {Number}/>
                         <ImageLinkForm
                             onInputChange={this.onInputChange}
                             onButtonSubmit={this.onButtonSubmit}
