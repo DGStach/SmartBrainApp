@@ -4,7 +4,7 @@ const PeopleCounter =({Number})=>{
     return (
         <div>
             <p>
-               Photo presents ${Number} people.
+               Photo presents {Number} people.
             </p>
         </div>
     )
