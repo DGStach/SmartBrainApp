@@ -15,6 +15,7 @@ const initialState = {
     box: [],
     route: 'register',
     isSignedIn: true,
+    errMsg:'',
     user: {
         id: '',
         name: '',
