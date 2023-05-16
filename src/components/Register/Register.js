@@ -25,6 +25,7 @@ class Register extends React.Component {
 
     onPasswordChange = (event) => {
         this.setState({password: event.target.value})
+        console.log("event.target.value-->" , event.target.value)
     }
 
 
@@ -32,6 +33,7 @@ class Register extends React.Component {
         // debugger
         e.preventDefault();
         fetch('https://smartbrainappbackend.onrender.com/register', {
+            mode: 'no-cors',
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -81,7 +83,9 @@ class Register extends React.Component {
                                     onChange={this.onEmailChange}
                                 />
                             </div>
-                            <PasswordBox/>
+                            <PasswordBox
+                                Parent = {this.props.Parent}
+                                onPasswordChange = {this.onPasswordChange}/>
                         </fieldset>
                         <div className="">
                             <input
