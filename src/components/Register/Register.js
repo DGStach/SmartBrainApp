@@ -30,10 +30,9 @@ class Register extends React.Component {
 
     onSubmitSignIn = (e) => {
         e.preventDefault();
-        fetch("http://localhost:3002/smart-brain-app/register", {
-            mode: 'no-cors',
+        fetch("http://localhost:3000/register", {
             method: 'post',
-            headers: {"Content-Type": "application/json"},
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 email: this.state.email,
                 password: this.state.password,
@@ -43,14 +42,13 @@ class Register extends React.Component {
         })
             .then(res => res.json())
             .then(user => {
-                console.log("In fetch on Buttom Submit")
                 if (user.id) {
                     this.props.loadUser(user)
                     this.props.onRouteChange('home')
                 } else {
                     this.setState({errMessage: user})
                 }
-            })
+            }).catch(err=>{console.log("catch register", err)})
     }
 
     render() {

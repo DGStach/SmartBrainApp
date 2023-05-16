@@ -13,7 +13,7 @@ const initialState = {
     input: '',
     imageUrl: '',
     box: [],
-    route: 'home',
+    route: 'register',
     isSignedIn: true,
     user: {
         id: '',
