@@ -25,7 +25,7 @@ class Register extends React.Component {
 
     onPasswordChange = (event) => {
         this.setState({password: event.target.value})
-        console.log("register", event.target.value)
+        setTimeout(console.log("register", event.target.value),0)
     }
 
 
@@ -47,7 +47,8 @@ class Register extends React.Component {
                     this.props.loadUser(user)
                     this.props.onRouteChange('home')
                 } else {
-                    this.setState({errMessage: user})
+                    this.setState({errMessage: user});
+                    setTimeout(console.log("Email is in use"));
                 }
             }).catch(err=>{console.log("catch register", err)})
     }
