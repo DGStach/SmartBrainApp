@@ -25,6 +25,7 @@ class Register extends React.Component {
 
     onPasswordChange = (event) => {
         this.setState({password: event.target.value})
+        console.log("register", event.target.value)
     }
 
 
@@ -79,7 +80,6 @@ class Register extends React.Component {
                                 />
                             </div>
                             <PasswordBox
-                                Parent = {this.props.Parent}
                                 onPasswordChange = {this.onPasswordChange}/>
                         </fieldset>
                         <div className="">

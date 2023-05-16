@@ -16,10 +16,11 @@ class Signin extends React.Component {
 
     onPasswordChange = (event) => {
         this.setState({signInPassword: event.target.value})
+        console.log("sign in ->", event.target.value)
     }
 
     onSubmitSignIn = () => {
-        fetch('https://smartbrainappbackend.onrender.com/signin', {
+        fetch('http://localhost:3000/signin', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -40,7 +41,6 @@ class Signin extends React.Component {
         const {onRouteChange} = this.props;
 
         return (
-
             <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
                 <main className="pa4 black-80">
                     <form className="measure">
@@ -55,7 +55,7 @@ class Signin extends React.Component {
                                     name="email-address"
                                     id="email-address"/>
                             </div>
-                         <PasswordBox/>
+                         <PasswordBox onPasswordChange = {this.onPasswordChange} />
                         </fieldset>
                         <div className="">
                             <input
