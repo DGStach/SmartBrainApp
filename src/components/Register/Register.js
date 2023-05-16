@@ -25,14 +25,12 @@ class Register extends React.Component {
 
     onPasswordChange = (event) => {
         this.setState({password: event.target.value})
-        console.log("event.target.value-->" , event.target.value)
     }
 
 
     onSubmitSignIn = (e) => {
-        // debugger
         e.preventDefault();
-        fetch('https://smartbrainappbackend.onrender.com/register', {
+        fetch("https://smartbrainappbackend.onrender.com", {
             mode: 'no-cors',
             method: 'post',
             headers: {'Content-Type': 'application/json'},
