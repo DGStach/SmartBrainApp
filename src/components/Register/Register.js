@@ -30,10 +30,10 @@ class Register extends React.Component {
 
     onSubmitSignIn = (e) => {
         e.preventDefault();
-        fetch("https://smartbrainappbackend.onrender.com", {
+        fetch("http://localhost:3002/smart-brain-app/register", {
             mode: 'no-cors',
             method: 'post',
-            headers: {'Content-Type': 'application/json'},
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
                 email: this.state.email,
                 password: this.state.password,
@@ -41,7 +41,6 @@ class Register extends React.Component {
                 entries: this.state.entries
             })
         })
-
             .then(res => res.json())
             .then(user => {
                 console.log("In fetch on Buttom Submit")
@@ -98,5 +97,6 @@ class Register extends React.Component {
         );
     }
 }
+
 
 export default Register
