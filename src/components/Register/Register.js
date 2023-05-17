@@ -29,6 +29,7 @@ class Register extends React.Component {
 
 
     onSubmitSignIn = (e) => {
+        const {email, password, name} = this.state
         e.preventDefault();
         fetch("https://smartbrainappbackend.onrender.com/register", {
             method: 'post',
@@ -45,8 +46,12 @@ class Register extends React.Component {
                 if (user.id) {
                     this.props.loadUser(user)
                     this.props.onRouteChange('home')
-                } else {
-                    this.setState({errMessage: "email address is already in usee"})
+                }
+                if (!email || !password || !name){
+                    this.setState({errMessage: "fulfill all data"})
+                }
+                else {
+                    this.setState({errMessage: "email address is already in use"})
                 }
             }).catch(err=>{console.log("catch register", err)})
     }
