@@ -21,7 +21,11 @@ class PasswordBox extends Component {
                     name="password"
                     minLength="8"
                     maxLength="20"
-                    pattern="^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$"
+                    pattern = "^(?=.*[A-Z])(?=.*[!@#$&*]).{8}$"
+
+/*
+                pattern="^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$"
+*/
                     title="min password length is 8 characters, at least one lowercase and uppercase and one character from set !@#$&* "
                     onChange={this.props.onPasswordChange}
                 />
