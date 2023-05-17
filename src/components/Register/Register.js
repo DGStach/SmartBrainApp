@@ -24,13 +24,48 @@ class Register extends React.Component {
     }
 
     onPasswordChange = (event) => {
+        console.log(event.target.value);
         this.setState({password: event.target.value})
+        this.setState({errMessage: ''})
     }
 
 
     onSubmitSignIn = (e) => {
-        const {email, password, name} = this.state
         e.preventDefault();
+
+        const {email, password, name} = this.state;
+        if (!name){
+            this.setState({errMessage: "name field is empty"});
+            return
+        }
+
+        if (!/^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)){
+            this.setState({errMessage: "email format incorrect"});
+            return;
+        }
+        if (!password){
+            this.setState({errMessage: "password field is empty"});
+            return
+        }
+
+        if (!/[A-Z]/.test(password)){
+            this.setState({errMessage: "password must contain upper letter"});
+            return;
+        }
+        if (!/[@#$%^&+=]/.test(password)){
+            this.setState({errMessage: "password must contain special character @#$%^&+="});
+            return;
+        }
+        if (password.length<8){
+            this.setState({errMessage: "min password length is 8 characters"});
+            return;
+        }
+        if (password.length>20){
+            this.setState({errMessage: "max password length is 20 characters"});
+            return;
+        }
+
+
         fetch("https://smartbrainappbackend.onrender.com/register", {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
@@ -70,17 +105,17 @@ class Register extends React.Component {
                                     type="text"
                                     name="name"
                                     id="name"
-                                    onChange={this.onNameChange}
+                                    onChange={(event)=>{this.onNameChange(event); this.setState({errMessage: ''})}}
                                 />
                             </div>
                             <div className="mt3">
                                 <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
                                 <input
                                     className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                    type="email"
+                                    type="text"
                                     name="email-address"
                                     id="email-address"
-                                    onChange={this.onEmailChange}
+                                    onChange={(event)=>{this.onEmailChange(event); this.setState({errMessage: ''})}}
                                 />
                             </div>
                             <PasswordBox

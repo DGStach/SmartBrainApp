@@ -19,15 +19,10 @@ class PasswordBox extends Component {
                     className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                     type={passType}
                     name="password"
-                    minLength="8"
-                    maxLength="20"
-                    pattern = "^(?=.*[A-Z])(?=.*[!@#$&*]).{8}$"
+                /*    minLength="8"
+                    maxLength="20"*/
+                   onChange={(e)=>this.props.onPasswordChange(e)}
 
-/*
-                pattern="^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$"
-*/
-                    title="min password length is 8 characters, at least one lowercase and uppercase and one character from set !@#$&* "
-                    onChange={this.props.onPasswordChange}
                 />
                 <div id="InlineInput" style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                     <input
