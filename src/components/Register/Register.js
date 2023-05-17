@@ -1,7 +1,7 @@
 import React from "react";
 import "../../App.css";
 import PasswordBox from "../PasswordBox/PasswordBox";
-
+import Spinner from "../Spinner/Spinner";
 class Register extends React.Component {
     constructor(props) {
         super(props);
@@ -11,7 +11,8 @@ class Register extends React.Component {
             name: "",
             entries: "",
             errMessage: '',
-            passType: "password"
+            passType: "password",
+            spinner: false
         }
     }
 
@@ -24,7 +25,6 @@ class Register extends React.Component {
     }
 
     onPasswordChange = (event) => {
-        console.log(event.target.value);
         this.setState({password: event.target.value})
         this.setState({errMessage: ''})
     }
@@ -64,7 +64,7 @@ class Register extends React.Component {
             this.setState({errMessage: "max password length is 20 characters"});
             return;
         }
-
+        this.setState({spinner: true})
 
         fetch("https://smartbrainappbackend.onrender.com/register", {
             method: 'post',
@@ -79,8 +79,9 @@ class Register extends React.Component {
             .then(res => res.json())
             .then(user => {
                 if (user.id) {
-                    this.props.loadUser(user)
-                    this.props.onRouteChange('home')
+                    this.props.loadUser(user);
+                    this.setState({spinner: false});
+                    this.props.onRouteChange('home');
                 }
                 if (!email || !password || !name){
                     this.setState({errMessage: "fulfill all data"})
@@ -89,10 +90,12 @@ class Register extends React.Component {
                     this.setState({errMessage: "email address is already in use"})
                 }
             }).catch(err=>{console.log("catch register", err)})
+
     }
 
     render() {
         return (
+            <div>
             <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
                 <main className="pa4 black-80">
                     <form className="measure" onSubmit={this.onSubmitSignIn}>
@@ -124,6 +127,7 @@ class Register extends React.Component {
                                 {this.state.errMessage}
                             </div>
                         </fieldset>
+                        <Spinner spinerState = {this.state.spinner}/>
                         <div className="">
                             <input
                                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
@@ -134,6 +138,7 @@ class Register extends React.Component {
                     </form>
                 </main>
             </article>
+            </div>
         );
     }
 }
