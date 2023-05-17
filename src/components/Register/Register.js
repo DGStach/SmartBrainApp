@@ -25,7 +25,6 @@ class Register extends React.Component {
 
     onPasswordChange = (event) => {
         this.setState({password: event.target.value})
-        console.log("register", event.target.value)
     }
 
 
@@ -47,7 +46,7 @@ class Register extends React.Component {
                     this.props.loadUser(user)
                     this.props.onRouteChange('home')
                 } else {
-                    this.setState({errMessage: user})
+                    this.setState({errMessage: "email address is already in usee"})
                 }
             }).catch(err=>{console.log("catch register", err)})
     }
@@ -81,6 +80,9 @@ class Register extends React.Component {
                             </div>
                             <PasswordBox
                                 onPasswordChange = {this.onPasswordChange}/>
+                            <div className="mt3 db fw6 lh-copy f6 dark-red">
+                                {this.state.errMessage}
+                            </div>
                         </fieldset>
                         <div className="">
                             <input
