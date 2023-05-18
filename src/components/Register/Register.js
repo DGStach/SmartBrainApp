@@ -3,6 +3,7 @@ import "../../App.css";
 import PasswordBox from "../PasswordBox/PasswordBox";
 import Spinner from "../Spinner/Spinner";
 class Register extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -80,17 +81,14 @@ class Register extends React.Component {
             .then(user => {
                 if (user.id) {
                     this.props.loadUser(user);
-                    this.setState({spinner: false});
+                    this.setState({spinner: false})
                     this.props.onRouteChange('home');
                 }
-                if (!email || !password || !name){
-                    this.setState({errMessage: "fulfill all data"})
-                }
                 else {
+                    this.setState({spinner: false})
                     this.setState({errMessage: "email address is already in use"})
                 }
-            }).catch(err=>{console.log("catch register", err)})
-
+            }).catch(err=>{console.log("catch register", err)});
     }
 
     render() {
@@ -127,7 +125,7 @@ class Register extends React.Component {
                                 {this.state.errMessage}
                             </div>
                         </fieldset>
-                        <Spinner spinerState = {this.state.spinner}/>
+                        <Spinner spinnerState={this.state.spinner}/>
                         <div className="">
                             <input
                                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"

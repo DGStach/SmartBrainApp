@@ -1,12 +1,13 @@
 import React from "react";
 import PasswordBox from "../PasswordBox/PasswordBox";
-
+import Spinner from "../Spinner/Spinner";
 class Signin extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             signInEmail: "",
-            signInPassword: ""
+            signInPassword: "",
+            spinner: false
         }
     }
 
@@ -16,10 +17,10 @@ class Signin extends React.Component {
 
     onPasswordChange = (event) => {
         this.setState({signInPassword: event.target.value})
-        console.log("sign in ->", event.target.value)
     }
 
     onSubmitSignIn = () => {
+        this.setState({spinner: true});
         fetch('https://smartbrainappbackend.onrender.com/signin', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
@@ -32,6 +33,7 @@ class Signin extends React.Component {
             .then(user => {
                 if (user.id) {
                     this.props.loadUser(user)
+                    this.setState({spinner: false});
                     this.props.onRouteChange('home')
                 }
             })
@@ -57,7 +59,8 @@ class Signin extends React.Component {
                             </div>
                          <PasswordBox onPasswordChange = {this.onPasswordChange} />
                         </fieldset>
-                        <div className="">
+                        <Spinner spinnerState= {this.state.spinner}/>
+                        <div >
                             <input
                                 onClick={this.onSubmitSignIn}
                                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
