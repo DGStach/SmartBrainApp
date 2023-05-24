@@ -1,6 +1,6 @@
 {
   "name": "smart-brain-app",
-  "homepage": "https://dgstach.github.io/smart-brain-app/",
+  "homepage": "./",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
