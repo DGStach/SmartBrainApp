@@ -13,7 +13,8 @@ const initialState = {
     input: '',
     imageUrl: '',
     box: [],
-    route: 'register',
+    imageData: {},
+    route: 'home',
     isSignedIn: true,
     user: {
         id: '',
@@ -25,12 +26,12 @@ const initialState = {
     }
 }
 
+
 class App extends Component {
     constructor() {
         super();
         this.state = initialState
     }
-
     loadUser = (data) => {
         this.setState({
             user: {
@@ -68,21 +69,25 @@ class App extends Component {
     onInputChange = (event) => {
         this.setState({input: event.target.value})
     }
-
+    image64code = (event) =>{
+        console.log("event.target.files[0]", event.target.files[0])
+        this.setState({imageData: event.target.files[0]})
+    }
 
     onButtonSubmit = () => {
         this.setState({imageUrl: this.state.input});
-        fetch('https://smartbrainappbackend.onrender.com/imageurl', {
+        let formData = new FormData();
+        formData.append('imageUrl', this.state.input )
+        formData.append('imageData', this.state.imageData )
+
+        fetch('http://localhost:3000/imageurl', {
             method: 'post',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                input: this.state.input
-            })
+            body: formData
         })
             .then(response => response.json())
             .then(response => {
                 if (response.status.description === "Ok") {
-                    fetch('https://smartbrainappbackend.onrender.com/image', {
+                    fetch('http://localhost:3000/image', {
                         method: 'put',
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify({
@@ -124,7 +129,9 @@ class App extends Component {
                         <ImageLinkForm
                             onInputChange={this.onInputChange}
                             onButtonSubmit={this.onButtonSubmit}
+                            image64code = {this.image64code}
                         />
+
                         <FaceRecognition box={box} imageUrl={imageUrl}/>
                     </div>
                     : (route === 'signin'
@@ -135,5 +142,7 @@ class App extends Component {
         );
     }
 }
+
+
 
 export default App;
