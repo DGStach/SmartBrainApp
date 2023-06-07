@@ -12,6 +12,7 @@ import Register from "./components/Register/Register";
 const initialState = {
     input: '',
     imageUrl: '',
+    imagePath: '',
     box: [],
     imageData: {},
     route: 'home',
@@ -70,8 +71,9 @@ class App extends Component {
         this.setState({input: event.target.value})
     }
     image64code = (event) =>{
-        console.log("event.target.files[0]", event.target.files[0])
         this.setState({imageData: event.target.files[0]})
+        this.setState({imagePath: event.target.value})
+        console.log("imagePath:", event.target.value)
     }
 
     onButtonSubmit = () => {
@@ -116,7 +118,7 @@ class App extends Component {
     }
 
     render() {
-        const {isSignedIn, box, route, imageUrl} = this.state;
+        const {isSignedIn, box, route, imageUrl, imagePath} = this.state;
         return (
             <div className="App">
                 <ParticlesBg type="cobweb" num={100} bg={true} v={800} color="#EEEEEE"/>
@@ -132,7 +134,7 @@ class App extends Component {
                             image64code = {this.image64code}
                         />
 
-                        <FaceRecognition box={box} imageUrl={imageUrl}/>
+                        <FaceRecognition box={box} imageUrl={imageUrl} imagePath={imagePath}/>
                     </div>
                     : (route === 'signin'
                             ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
