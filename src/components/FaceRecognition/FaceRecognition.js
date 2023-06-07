@@ -9,12 +9,12 @@ const FaceRecognition = ({imageUrl, box, imagePath}) => {
 
     if(imagePath) {
         const fileInput = document.getElementById("image-file");
-        const imagePreview = document.getElementById('imagePreview');
+        const inputImage = document.getElementById('inputImage');
         const file = fileInput.files[0];
         const reader = new FileReader();
 
         reader.onload = function (event) {
-            imagePreview.src = event.target.result;
+            inputImage.src = event.target.result;
         };
         reader.readAsDataURL(file);
     }
@@ -22,8 +22,7 @@ const FaceRecognition = ({imageUrl, box, imagePath}) => {
    return (
         <div className='center ma'>
             <div className='absolute mt2' id = "Box">
-             {/*   <img id="inputImage" alt="" src={imageUrl} width='500px' height='auto'/>*/}
-                <img id="imagePreview" src="" alt="" />
+                <img id="inputImage" alt="" src={imageUrl} width='500px' height='auto'/>
                 {listItems}
             </div>
         </div>
