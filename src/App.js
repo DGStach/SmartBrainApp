@@ -69,11 +69,13 @@ class App extends Component {
 
     onInputChange = (event) => {
         this.setState({input: event.target.value})
+        this.setState({imagePath: ""})
+
     }
     image64code = (event) =>{
         this.setState({imageData: event.target.files[0]})
         this.setState({imagePath: event.target.value})
-        console.log("imagePath:", event.target.value)
+        this.setState({input: ""})
     }
 
     onButtonSubmit = () => {
