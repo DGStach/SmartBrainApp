@@ -1,11 +1,23 @@
 import React from "react";
 import './FaceRecognition.css';
 
-const FaceRecognition = ({imageUrl, box}) => {
+const FaceRecognition = ({imageUrl, box, imagePath}) => {
     const listItems = box.map((box,i) =>
         <div className='bounding-box' key = {i}
              style={{top: box.topRow, right: box.rightCol, bottom: box.bottomRow, left: box.leftCol}}></div>
     );
+
+    if(imagePath) {
+        const fileInput = document.getElementById("image-file");
+        const inputImage = document.getElementById('inputImage');
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function (event) {
+            inputImage.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
 
    return (
         <div className='center ma'>
