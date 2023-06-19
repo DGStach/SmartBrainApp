@@ -12,12 +12,20 @@
 .bgDetect {
     background-color: rgb(44, 158, 39);
     cursor: pointer;
-    margin: 1px;
+    margin-top: 60px;
+}
+.choseFile {
+    background-color: rgb(24, 158, 39);
+    cursor: pointer;
+    box-shadow: 4px 4px 8px 0 rgba( 0, 0, 0, .5 );
+    border: 2px;
 }
 
-
-input   {
+input {
     width: 70%;
+    text-indent: 5px;
+    height: 40px;
+    text-align: center;
 }
 
 #image-file{

@@ -1,6 +1,5 @@
 import React from 'react';
 import './ImageLinkForm.css'
-import logo from './file-folder.png'
 
 const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code}) => {
     return (
@@ -9,13 +8,17 @@ const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code}) => {
                 {'This Magic Brain will detect your faces in your pictures. Git it a try.'}
             </p>
             <div className='center'>
-                <div className='form center pa4 br3 shadow-5'>
-                    <input clasename=' f4 pa2' type='text' onChange={onInputChange}/>
-                    <form encType="multipart/form-data" action="/upload/image" method="post">
-                       <label for = "image-file" className=' grow f4 link ph3 pv2 dib white bgDetect'>Chose File</label>
-                        <input id="image-file" type="file" onChange={image64code}/>
-                    </form>
-                    <button className=' grow f4 link ph3 pv2 dib white bgDetect'
+                <div className='form pa4 br3 shadow-5'>
+                    <div className="photoInputs">
+                        <input clasename='placeholder f4 pa2 ' type='text' placeholder="past photo's url link" onChange={onInputChange}/>
+                       <div className='f3 pa2'> or </div>
+                        <form encType="multipart/form-data" action="/upload/image" method="post">
+                            <label htmlFor="image-file" className=' grow f4 link ph3 pv2 dib white-90 choseFile'>Chose
+                                File</label>
+                            <input id="image-file" type="file" onChange={image64code}/>
+                        </form>
+                    </div>
+                    <button className='grow f4 link pv2 ph2 dib w-70 black-80 bgDetect'
                             onClick={onButtonSubmit}
                     >Detect
                     </button>
