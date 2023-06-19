@@ -68,21 +68,30 @@ class App extends Component {
     }
 
     onInputChange = (event) => {
+        //input - data from http picture
         this.setState({input: event.target.value})
         this.setState({imagePath: ""})
+        this.setState({imageData: {}})
+
 
     }
     image64code = (event) =>{
+        // image Data - data from png/url photo
+
         this.setState({imageData: event.target.files[0]})
         this.setState({imagePath: event.target.value})
         this.setState({input: ""})
+
     }
 
     onButtonSubmit = () => {
         this.setState({imageUrl: this.state.input});
+
         let formData = new FormData();
         formData.append('imageUrl', this.state.input )
         formData.append('imageData', this.state.imageData )
+        console.log("this.state.imageData ", this.state.imageData )
+        console.log("this.state.input  ", this.state.input )
 
         fetch('http://localhost:3002/imageurl', {
             method: 'post',

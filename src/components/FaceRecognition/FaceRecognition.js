@@ -10,8 +10,11 @@ const FaceRecognition = ({imageUrl, box, imagePath}) => {
     if(imagePath) {
         const fileInput = document.getElementById("image-file");
         const inputImage = document.getElementById('inputImage');
+        const photoHttp = document.getElementById('photoHttp');
+        photoHttp.value = "";
         const file = fileInput.files[0];
         const reader = new FileReader();
+
 
         reader.onload = function (event) {
             inputImage.src = event.target.result;
