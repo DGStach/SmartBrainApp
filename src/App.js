@@ -84,14 +84,14 @@ class App extends Component {
         formData.append('imageUrl', this.state.input )
         formData.append('imageData', this.state.imageData )
 
-        fetch('http://localhost:3000/imageurl', {
+        fetch('http://localhost:3002/imageurl', {
             method: 'post',
             body: formData
         })
             .then(response => response.json())
             .then(response => {
                 if (response.status.description === "Ok") {
-                    fetch('http://localhost:3000/image', {
+                    fetch('http://localhost:3002/image', {
                         method: 'put',
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify({

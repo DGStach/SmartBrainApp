@@ -19,8 +19,6 @@ class PasswordBox extends Component {
                     className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                     type={passType}
                     name="password"
-                /*    minLength="8"
-                    maxLength="20"*/
                    onChange={(e)=>this.props.onPasswordChange(e)}
 
                 />
