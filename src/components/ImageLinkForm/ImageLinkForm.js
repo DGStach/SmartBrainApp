@@ -20,6 +20,11 @@ const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code}) => {
                     </form>
                 </div>
             </div>
+                <div className="pv2">
+                examples https:
+                <div>https://raw.githubusercontent.com/DGStach/smartBrainAppFrontend/master/public/people.jpeg</div>
+                <div>https://raw.githubusercontent.com/DGStach/smartBrainAppBackend/master/controllers/a.png</div>
+            </div>
         </div>
 
     )
