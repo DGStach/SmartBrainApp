@@ -3,11 +3,12 @@ import React from 'react';
     return (
         <div>
             <div className='white f3'>
-                {`${name}, your current rank is `}
+                {`${name}, use smart brain app`}
             </div>
             <div className='white f1'>
                 {entries}
             </div>
+            <div className='white f3'>times</div>
         </div>
     )
 }

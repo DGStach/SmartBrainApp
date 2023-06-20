@@ -68,43 +68,51 @@ class App extends Component {
     }
 
     onInputChange = (event) => {
+        //input - data from http picture
         this.setState({input: event.target.value})
         this.setState({imagePath: ""})
+        this.setState({imageData: ""})
+
 
     }
     image64code = (event) =>{
+        // image Data - data from png/url photo
         this.setState({imageData: event.target.files[0]})
         this.setState({imagePath: event.target.value})
         this.setState({input: ""})
+        this.setState({imageUrl: ""})
+        this.setState({box: []});
     }
 
     onButtonSubmit = () => {
+        this.setState({box: []});
         this.setState({imageUrl: this.state.input});
         let formData = new FormData();
         formData.append('imageUrl', this.state.input )
         formData.append('imageData', this.state.imageData )
 
-        fetch('http://localhost:3000/imageurl', {
+        fetch('http://localhost:3002/imageurl', {
             method: 'post',
             body: formData
         })
             .then(response => response.json())
             .then(response => {
                 if (response.status.description === "Ok") {
-                    fetch('http://localhost:3000/image', {
+                    this.DisplayFaceBox(this.Coordinates(response))
+                    fetch('http://localhost:3002/image', {
                         method: 'put',
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify({
                             id: this.state.user.id
                         })
                     })
+                        .then(data => console.log(JSON.stringify(data.json())))
                         .then(res => res.json())
                         .then(count => {
                             this.setState(Object.assign(this.state.user, {entries: count.entries}))
                         })
                         .catch(console.log)
                 }
-                this.DisplayFaceBox(this.Coordinates(response))
             })
             .catch(error => console.log
             (error + 'error'))
