@@ -71,27 +71,25 @@ class App extends Component {
         //input - data from http picture
         this.setState({input: event.target.value})
         this.setState({imagePath: ""})
-        this.setState({imageData: {}})
+        this.setState({imageData: ""})
 
 
     }
     image64code = (event) =>{
         // image Data - data from png/url photo
-
         this.setState({imageData: event.target.files[0]})
         this.setState({imagePath: event.target.value})
         this.setState({input: ""})
-
+        this.setState({imageUrl: ""})
+        this.setState({box: []});
     }
 
     onButtonSubmit = () => {
+        this.setState({box: []});
         this.setState({imageUrl: this.state.input});
-
         let formData = new FormData();
         formData.append('imageUrl', this.state.input )
         formData.append('imageData', this.state.imageData )
-        console.log("this.state.imageData ", this.state.imageData )
-        console.log("this.state.input  ", this.state.input )
 
         fetch('http://localhost:3002/imageurl', {
             method: 'post',
@@ -100,6 +98,7 @@ class App extends Component {
             .then(response => response.json())
             .then(response => {
                 if (response.status.description === "Ok") {
+                    this.DisplayFaceBox(this.Coordinates(response))
                     fetch('http://localhost:3002/image', {
                         method: 'put',
                         headers: {'Content-Type': 'application/json'},
@@ -107,13 +106,13 @@ class App extends Component {
                             id: this.state.user.id
                         })
                     })
+                        .then(data => console.log(JSON.stringify(data.json())))
                         .then(res => res.json())
                         .then(count => {
                             this.setState(Object.assign(this.state.user, {entries: count.entries}))
                         })
                         .catch(console.log)
                 }
-                this.DisplayFaceBox(this.Coordinates(response))
             })
             .catch(error => console.log
             (error + 'error'))
