@@ -7,7 +7,9 @@ class Signin extends React.Component {
         this.state = {
             signInEmail: "",
             signInPassword: "",
-            spinner: false
+            spinner: false,
+            signInEmailGuess: "Guess@gmail.com",
+            signInPasswordGuess: "Guess@gmail.com",
         }
     }
 
@@ -19,14 +21,34 @@ class Signin extends React.Component {
         this.setState({signInPassword: event.target.value})
     }
 
+    onSubmitSignInGuess = () => {
+        this.setState({spinner: true});
+        fetch('https://smartbrainappbackend.onrender.com/signin', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                email: this.state.signInEmailGuess,
+                password: this.state.signInPasswordGuess
+            })
+        })
+            .then(res => res.json())
+            .then(user => {
+                if (user.id) {
+                    this.props.loadUser(user)
+                    this.setState({spinner: false});
+                    this.props.onRouteChange('home')
+                }
+            })
+    }
+
     onSubmitSignIn = () => {
         this.setState({spinner: true});
         fetch('https://smartbrainappbackend.onrender.com/signin', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                email: this.state.signInEmail,
-                password: this.state.signInPassword
+                email: this.state.signInEmailGuess,
+                password: this.state.signInPasswordGuess
             })
         })
             .then(res => res.json())
@@ -66,6 +88,13 @@ class Signin extends React.Component {
                                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                                 type="button"
                                 value="Sign in"/>
+                        </div>
+                        <div>
+                            <input
+                                onClick={this.onSubmitSignInGuess}
+                                className="b mt2 ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
+                                type="button"
+                                value="Login as Guess"/>
                         </div>
                         <i className="fa fa-eye-slash" aria-hidden="false"></i>
                         <div className="lh-copy mt3">
