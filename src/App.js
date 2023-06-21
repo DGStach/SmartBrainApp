@@ -10,6 +10,7 @@ import Signin from "./components/Signin/Signin";
 import Register from "./components/Register/Register";
 
 const initialState = {
+    clicker: 1,
     input: '',
     imageUrl: '',
     imagePath: '',
@@ -23,7 +24,7 @@ const initialState = {
         email: '',
         entries: '',
         joined: '',
-        number: 3
+        number: ''
     }
 }
 
@@ -32,6 +33,23 @@ class App extends Component {
         super();
         this.state = initialState
     }
+
+    componentDidMount() {
+        const clicker = localStorage.getItem("clicker");
+        this.setState({clicker:Number(clicker)})
+
+    }
+
+    Clicker = (event) => {
+        let counter = this.state.clicker
+        counter = counter + 1;
+        this.setState({
+            clicker: counter
+        })
+        localStorage.setItem("clicker", counter)
+    }
+
+
     loadUser = (data) => {
         this.setState({
             user: {
@@ -71,10 +89,8 @@ class App extends Component {
         this.setState({input: event.target.value})
         this.setState({imagePath: ""})
         this.setState({imageData: ""})
-
-
     }
-    image64code = (event) =>{
+    image64code = (event) => {
         // image Data - data from png/url photo
         this.setState({imageData: event.target.files[0]})
         this.setState({imagePath: event.target.value})
@@ -87,8 +103,8 @@ class App extends Component {
         this.setState({box: []});
         this.setState({imageUrl: this.state.input});
         let formData = new FormData();
-        formData.append('imageUrl', this.state.input )
-        formData.append('imageData', this.state.imageData )
+        formData.append('imageUrl', this.state.input)
+        formData.append('imageData', this.state.imageData)
 
         fetch('http://localhost:3002/imageurl', {
             method: 'post',
@@ -130,6 +146,9 @@ class App extends Component {
         const {isSignedIn, box, route, imageUrl, imagePath} = this.state;
         return (
             <div className="App">
+                <button onClick={this.Clicker}>
+                    {this.state.clicker}
+                </button>
                 <ParticlesBg type="cobweb" num={100} bg={true} v={800} color="#EEEEEE"/>
                 <Navigation isSignedIn={isSignedIn}
                             onRouteChange={this.onRouteChange}/>
@@ -140,7 +159,7 @@ class App extends Component {
                         <ImageLinkForm
                             onInputChange={this.onInputChange}
                             onButtonSubmit={this.onButtonSubmit}
-                            image64code = {this.image64code}
+                            image64code={this.image64code}
                         />
 
                         <FaceRecognition box={box} imageUrl={imageUrl} imagePath={imagePath}/>
@@ -153,7 +172,6 @@ class App extends Component {
         );
     }
 }
-
 
 
 export default App;
