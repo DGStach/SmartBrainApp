@@ -13,7 +13,9 @@ class Register extends React.Component {
             entries: "",
             errMessage: '',
             passType: "password",
-            spinner: false
+            spinner: false,
+            signInEmailGuess: "Guess@gmail.com",
+            signInPasswordGuess: "Guess@gmail.com",
         }
     }
 
@@ -30,6 +32,25 @@ class Register extends React.Component {
         this.setState({errMessage: ''})
     }
 
+    onSubmitSignInGuess = () => {
+        this.setState({spinner: true});
+        fetch('https://smartbrainappbackend.onrender.com/signin', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                email: this.state.signInEmailGuess,
+                password: this.state.signInPasswordGuess
+            })
+        })
+            .then(res => res.json())
+            .then(user => {
+                if (user.id) {
+                    this.props.loadUser(user)
+                    this.setState({spinner: false});
+                    this.props.onRouteChange('home')
+                }
+            })
+    }
 
     onSubmitSignIn = (e) => {
         e.preventDefault();
@@ -132,6 +153,13 @@ class Register extends React.Component {
                                 type="submit"
                                 value="Register"
                             />
+                        </div>
+                        <div>
+                            <input
+                                onClick={this.onSubmitSignInGuess}
+                                className="b mt2 ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
+                                type="button"
+                                value="Login as Guess"/>
                         </div>
                     </form>
                 </main>
