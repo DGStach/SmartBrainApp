@@ -61,7 +61,7 @@ class Register extends React.Component {
             return
         }
 
-        if (!/^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)){
+        if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))){
             this.setState({errMessage: "email format incorrect"});
             return;
         }
@@ -74,16 +74,12 @@ class Register extends React.Component {
             this.setState({errMessage: "password must contain upper letter"});
             return;
         }
-        if (!/[@#$%^&+=]/.test(password)){
-            this.setState({errMessage: "password must contain special character @#$%^&+="});
+        if (!/[@#$%^&+!?=]/.test(password)){
+            this.setState({errMessage: "password must contain special character @#$%^&+=!?"});
             return;
         }
         if (password.length<8){
             this.setState({errMessage: "min password length is 8 characters"});
-            return;
-        }
-        if (password.length>20){
-            this.setState({errMessage: "max password length is 20 characters"});
             return;
         }
         this.setState({spinner: true})

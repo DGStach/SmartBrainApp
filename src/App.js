@@ -15,7 +15,7 @@ const initialState = {
     imagePath: '',
     box: [],
     imageData: {},
-    route: 'home',
+    route: 'signin',
     isSignedIn: true,
     user: {
         id: '',
@@ -26,7 +26,6 @@ const initialState = {
         number: 3
     }
 }
-
 
 class App extends Component {
     constructor() {
