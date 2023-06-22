@@ -5,6 +5,7 @@ import SigninGuess from "../SigninGuess/SigninGuess"
 */
 
 import Spinner from "../Spinner/Spinner";
+
 class Signin extends React.Component {
     constructor(props) {
         super(props);
@@ -61,6 +62,9 @@ class Signin extends React.Component {
                     this.props.loadUser(user)
                     this.setState({spinner: false});
                     this.props.onRouteChange('home')
+                    localStorage.setItem("UserDataName", user.name)
+                    localStorage.setItem("UserDataEmail", user.email)
+                    localStorage.setItem("UserDataEntries", user.entries)
                 }
             })
     }
@@ -83,10 +87,10 @@ class Signin extends React.Component {
                                     name="email-address"
                                     id="email-address"/>
                             </div>
-                         <PasswordBox onPasswordChange = {this.onPasswordChange} />
+                            <PasswordBox onPasswordChange={this.onPasswordChange}/>
                         </fieldset>
-                        <Spinner spinnerState= {this.state.spinner}/>
-                        <div >
+                        <Spinner spinnerState={this.state.spinner}/>
+                        <div>
                             <input
                                 onClick={this.onSubmitSignIn}
                                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"

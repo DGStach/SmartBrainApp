@@ -1,6 +1,6 @@
 import React from "react";
 
-const Navigation = ({onRouteChange, isSignedIn}) => {
+const Navigation = ({onRouteChange, isSignedIn, sessionOF}) => {
     if (isSignedIn){
         return(
         <nav style={{display: "flex", justifyContent: "flex-end"}}>
@@ -13,7 +13,7 @@ const Navigation = ({onRouteChange, isSignedIn}) => {
     } else{
         return (
             <nav style={{display: "flex", justifyContent: "flex-end"}}>
-            <p onClick={()=>onRouteChange('signin')}
+            <p onClick={()=>{console.log("sessionOF")}}
             className='link dim black underline pa3 pointer'>Sign Out</p>
             </nav>
         )};

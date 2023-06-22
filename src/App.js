@@ -10,7 +10,6 @@ import Signin from "./components/Signin/Signin";
 import Register from "./components/Register/Register";
 
 const initialState = {
-    clicker: 1,
     input: '',
     imageUrl: '',
     imagePath: '',
@@ -18,6 +17,7 @@ const initialState = {
     imageData: {},
     route: 'signin',
     isSignedIn: true,
+    login: "login",
     user: {
         id: '',
         name: '',
@@ -34,19 +34,22 @@ class App extends Component {
         this.state = initialState
     }
 
-    componentDidMount() {
-        const clicker = localStorage.getItem("clicker");
-        this.setState({clicker:Number(clicker)})
 
+    componentDidMount() {
+        const UserDataName = localStorage.getItem("UserDataName")
+        if (UserDataName) {
+            this.setState({route: "home"})
+        }
+        if (this.state.login === "signout"){
+            console.log("UserDataName", this.state.login)
+            localStorage.removeItem("UserDataName")
+        }
     }
 
-    Clicker = (event) => {
-        let counter = this.state.clicker
-        counter = counter + 1;
-        this.setState({
-            clicker: counter
-        })
-        localStorage.setItem("clicker", counter)
+    sessionOF = (login) =>{
+        this.setState({login : login})
+        console.log("sessionOF",login,"----")
+
     }
 
 
@@ -134,6 +137,9 @@ class App extends Component {
     }
 
     onRouteChange = (route) => {
+        if (this.state.login === "login") {
+            this.setState({route: 'home'})
+        }
         if (route === 'signin') {
             this.setState(initialState)
         } else if (route === 'home') {
@@ -146,12 +152,17 @@ class App extends Component {
         const {isSignedIn, box, route, imageUrl, imagePath} = this.state;
         return (
             <div className="App">
-                <button onClick={this.Clicker}>
-                    {this.state.clicker}
-                </button>
+                <button
+                    onClick={()=>{
+                    this.setState({login:"signout"})
+                    setTimeout(()=>console.log(this.state.login), 0);
+                }}
+                ></button>
                 <ParticlesBg type="cobweb" num={100} bg={true} v={800} color="#EEEEEE"/>
                 <Navigation isSignedIn={isSignedIn}
-                            onRouteChange={this.onRouteChange}/>
+                            onRouteChange={this.onRouteChange}
+                            sessionOF = {this.sessionOF}
+                />
                 {route === 'home'
                     ? <div>
                         <Logo/>
@@ -161,7 +172,6 @@ class App extends Component {
                             onButtonSubmit={this.onButtonSubmit}
                             image64code={this.image64code}
                         />
-
                         <FaceRecognition box={box} imageUrl={imageUrl} imagePath={imagePath}/>
                     </div>
                     : (route === 'signin'
