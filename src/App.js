@@ -16,14 +16,15 @@ const initialState = {
     box: [],
     imageData: {},
     route: 'signin',
-    isSignedIn: true,
+    isSignedIn: false, // true or false
+    login: "login", //    'signin' or 'signout'
     user: {
         id: '',
         name: '',
         email: '',
         entries: '',
         joined: '',
-        number: 3
+        number: ''
     }
 }
 
@@ -32,6 +33,28 @@ class App extends Component {
         super();
         this.state = initialState
     }
+
+
+    componentDidMount() {
+        const UserDataName = localStorage.getItem("UserDataName")
+        if (UserDataName) {
+            this.setState({route: "home"})
+            this.setState({isSignedIn:true})
+        }
+        if (this.state.login === "signout"){
+            localStorage.removeItem("UserDataName")
+            localStorage.removeItem("UserDataEntries")
+
+        }
+    }
+
+    sessionOF = (login) =>{
+        this.setState({login : login})
+        localStorage.removeItem("UserDataName")
+        localStorage.removeItem("UserDataEntries")
+    }
+
+
     loadUser = (data) => {
         this.setState({
             user: {
@@ -71,10 +94,8 @@ class App extends Component {
         this.setState({input: event.target.value})
         this.setState({imagePath: ""})
         this.setState({imageData: ""})
-
-
     }
-    image64code = (event) =>{
+    image64code = (event) => {
         // image Data - data from png/url photo
         this.setState({imageData: event.target.files[0]})
         this.setState({imagePath: event.target.value})
@@ -87,8 +108,8 @@ class App extends Component {
         this.setState({box: []});
         this.setState({imageUrl: this.state.input});
         let formData = new FormData();
-        formData.append('imageUrl', this.state.input )
-        formData.append('imageData', this.state.imageData )
+        formData.append('imageUrl', this.state.input)
+        formData.append('imageData', this.state.imageData)
 
         fetch('http://localhost:3002/imageurl', {
             method: 'post',
@@ -117,22 +138,36 @@ class App extends Component {
             (error + 'error'))
     }
 
+    isSignedIn = (val) =>{
+        this.setState({isSignedIn:val});
+    }
+
     onRouteChange = (route) => {
         if (route === 'signin') {
             this.setState(initialState)
         } else if (route === 'home') {
-            this.setState({isSignedIn: false})
+            this.setState({isSignedIn: true})
         }
+        this.setState({isSignedIn: false})
         this.setState({route: route});
+
     }
 
     render() {
         const {isSignedIn, box, route, imageUrl, imagePath} = this.state;
         return (
             <div className="App">
+                <button
+                    onClick={()=>{
+                    this.setState({login:"signout"})
+                    setTimeout(()=>console.log(this.state.login), 0);
+                }}
+                ></button>
                 <ParticlesBg type="cobweb" num={100} bg={true} v={800} color="#EEEEEE"/>
                 <Navigation isSignedIn={isSignedIn}
-                            onRouteChange={this.onRouteChange}/>
+                            onRouteChange={this.onRouteChange}
+                            sessionOF = {this.sessionOF}
+                />
                 {route === 'home'
                     ? <div>
                         <Logo/>
@@ -140,9 +175,8 @@ class App extends Component {
                         <ImageLinkForm
                             onInputChange={this.onInputChange}
                             onButtonSubmit={this.onButtonSubmit}
-                            image64code = {this.image64code}
+                            image64code={this.image64code}
                         />
-
                         <FaceRecognition box={box} imageUrl={imageUrl} imagePath={imagePath}/>
                     </div>
                     : (route === 'signin'
@@ -153,7 +187,6 @@ class App extends Component {
         );
     }
 }
-
 
 
 export default App;
