@@ -16,8 +16,8 @@ const initialState = {
     box: [],
     imageData: {},
     route: 'signin',
-    isSignedIn: false,
-    login: "login",
+    isSignedIn: false, // true or false
+    login: "login", //    'signin' or 'signout'
     user: {
         id: '',
         name: '',
@@ -39,17 +39,19 @@ class App extends Component {
         const UserDataName = localStorage.getItem("UserDataName")
         if (UserDataName) {
             this.setState({route: "home"})
+            this.setState({isSignedIn:true})
         }
         if (this.state.login === "signout"){
             localStorage.removeItem("UserDataName")
+            localStorage.removeItem("UserDataEntries")
+
         }
     }
 
     sessionOF = (login) =>{
         this.setState({login : login})
-        console.log("sessionOF",login,"----")
         localStorage.removeItem("UserDataName")
-        localStorage.removeItem("UserDataName")
+        localStorage.removeItem("UserDataEntries")
     }
 
 
@@ -136,16 +138,19 @@ class App extends Component {
             (error + 'error'))
     }
 
+    isSignedIn = (val) =>{
+        this.setState({isSignedIn:val});
+    }
+
     onRouteChange = (route) => {
-        if (this.state.login === "login") {
-            this.setState({route: 'home'})
-        }
         if (route === 'signin') {
             this.setState(initialState)
         } else if (route === 'home') {
-            this.setState({isSignedIn: false})
+            this.setState({isSignedIn: true})
         }
+        this.setState({isSignedIn: false})
         this.setState({route: route});
+
     }
 
     render() {
