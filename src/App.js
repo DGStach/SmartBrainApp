@@ -16,7 +16,7 @@ const initialState = {
     box: [],
     imageData: {},
     route: 'signin',
-    isSignedIn: true,
+    isSignedIn: false,
     login: "login",
     user: {
         id: '',
@@ -41,7 +41,6 @@ class App extends Component {
             this.setState({route: "home"})
         }
         if (this.state.login === "signout"){
-            console.log("UserDataName", this.state.login)
             localStorage.removeItem("UserDataName")
         }
     }
@@ -49,7 +48,8 @@ class App extends Component {
     sessionOF = (login) =>{
         this.setState({login : login})
         console.log("sessionOF",login,"----")
-
+        localStorage.removeItem("UserDataName")
+        localStorage.removeItem("UserDataName")
     }
 
 

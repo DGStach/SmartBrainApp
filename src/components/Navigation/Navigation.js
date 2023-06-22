@@ -13,7 +13,7 @@ const Navigation = ({onRouteChange, isSignedIn, sessionOF}) => {
     } else{
         return (
             <nav style={{display: "flex", justifyContent: "flex-end"}}>
-            <p onClick={()=>{console.log("sessionOF")}}
+            <p onClick={()=>{sessionOF('signout'); onRouteChange('signin') }}
             className='link dim black underline pa3 pointer'>Sign Out</p>
             </nav>
         )};
