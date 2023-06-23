@@ -29,8 +29,8 @@ const initialState = {
 }
 
 class App extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = initialState
     }
 
@@ -84,6 +84,15 @@ class App extends Component {
         return box
     }
 
+    exampleImageUrl = (imageUrl) => {
+        this.setState({input: imageUrl})
+        this.setState({imageUrl: imageUrl})
+        this.setState({imagePath: ""})
+        this.setState({imageData: ""})
+        this.setState({box: []});
+        setTimeout(()=>this.onButtonSubmit(),0)
+    }
+
     DisplayFaceBox = (box) => {
         this.setState({box: box});
     }
@@ -106,6 +115,7 @@ class App extends Component {
     onButtonSubmit = () => {
         this.setState({box: []});
         this.setState({imageUrl: this.state.input});
+
         let formData = new FormData();
         formData.append('imageUrl', this.state.input)
         formData.append('imageData', this.state.imageData)
@@ -125,7 +135,6 @@ class App extends Component {
                             id: this.state.user.id
                         })
                     })
-                        .then(data => console.log(JSON.stringify(data.json())))
                         .then(res => res.json())
                         .then(count => {
                             this.setState(Object.assign(this.state.user, {entries: count.entries}))
@@ -136,7 +145,6 @@ class App extends Component {
             .catch(error => console.log
             (error + 'error'))
     }
-
 
     onRouteChange = (route) => {
             if (route === 'signin') {
@@ -153,12 +161,6 @@ class App extends Component {
         const {isSignedIn, box, route, imageUrl, imagePath} = this.state;
         return (
             <div className="App">
-            {/*    <button
-                    onClick={()=>{
-                    this.setState({login:"signout"})
-                    setTimeout(()=>console.log(this.state.login), 0);
-                }}
-                ></button>*/}
                 <ParticlesBg type="cobweb" num={100} bg={true} v={800} color="#EEEEEE"/>
                 <Navigation isSignedIn={isSignedIn}
                             onRouteChange={this.onRouteChange}
@@ -172,6 +174,7 @@ class App extends Component {
                             onInputChange={this.onInputChange}
                             onButtonSubmit={this.onButtonSubmit}
                             image64code={this.image64code}
+                            exampleImageUrl = {this.exampleImageUrl}
                         />
                         <FaceRecognition box={box} imageUrl={imageUrl} imagePath={imagePath}/>
                     </div>

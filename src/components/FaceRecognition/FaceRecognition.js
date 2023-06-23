@@ -2,7 +2,6 @@ import React from "react";
 import './FaceRecognition.css';
 
 const FaceRecognition = ({imageUrl, box, imagePath}) => {
-    console.log("box", box);
     const listItems = box.map((box,i) =>
         <div className='bounding-box' key = {i}
              style={{top: box.topRow, right: box.rightCol, bottom: box.bottomRow, left: box.leftCol}}></div>
