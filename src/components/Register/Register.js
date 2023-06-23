@@ -14,8 +14,8 @@ class Register extends React.Component {
             errMessage: '',
             passType: "password",
             spinner: false,
-            signInEmailGuess: "Guess@gmail.com",
-            signInPasswordGuess: "Guess@gmail.com",
+/*            signInEmailGuess: "Guess@gmail.com",
+            signInPasswordGuess: "Guess@gmail.com",*/
         }
     }
 
@@ -32,7 +32,7 @@ class Register extends React.Component {
         this.setState({errMessage: ''})
     }
 
-    onSubmitSignInGuess = () => {
+/*    onSubmitSignInGuess = () => {
         this.setState({spinner: true});
         fetch('https://smartbrainappbackend.onrender.com/signin', {
             method: 'post',
@@ -50,7 +50,7 @@ class Register extends React.Component {
                     this.props.onRouteChange('home')
                 }
             })
-    }
+    }*/
 
     onSubmitSignIn = (e) => {
         e.preventDefault();
