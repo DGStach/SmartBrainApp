@@ -90,6 +90,7 @@ class App extends Component {
         this.setState({imagePath: ""})
         this.setState({imageData: ""})
         this.setState({box: []});
+        setTimeout(()=>this.onButtonSubmit(),0)
     }
 
     DisplayFaceBox = (box) => {
@@ -115,9 +116,6 @@ class App extends Component {
         this.setState({box: []});
         this.setState({imageUrl: this.state.input});
 
-        setTimeout(()=>console.log("imageUrl", typeof(this.state.input)),0)
-        setTimeout(()=>console.log("imageUrl- on buttom submit", this.state.input),0)
-
         let formData = new FormData();
         formData.append('imageUrl', this.state.input)
         formData.append('imageData', this.state.imageData)
@@ -137,7 +135,6 @@ class App extends Component {
                             id: this.state.user.id
                         })
                     })
-                        .then(data => console.log(JSON.stringify(data.json())))
                         .then(res => res.json())
                         .then(count => {
                             this.setState(Object.assign(this.state.user, {entries: count.entries}))
