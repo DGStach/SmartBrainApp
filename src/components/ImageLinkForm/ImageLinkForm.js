@@ -22,16 +22,19 @@ const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code}) => {
                             onClick={onButtonSubmit}
                     >Detect
                     </button>
-
                 </div>
+
             </div>
-                <div className="pv2">
+                <div className="pv2 ph3 longtext">
                 examples https:
-                <div>https://raw.githubusercontent.com/DGStach/smartBrainAppFrontend/master/public/people.jpeg</div>
-                <div>https://raw.githubusercontent.com/DGStach/smartBrainAppBackend/master/controllers/a.png</div>
+                <div>
+                    <button className='pv0.5 ph1 mr1 bg-white-10 ' >Use Link</button>
+                    https://raw.githubusercontent.com/DGStach/smartBrainAppFrontend/master/public/people.jpeg</div>
+                <div className="mt1">
+                    <button className='pv0.5 ph1 mr1 bg-white-10 ' >Use Link</button>
+                    https://raw.githubusercontent.com/DGStach/smartBrainAppBackend/master/controllers/a.png</div>
             </div>
         </div>
-
     )
 }
 export default ImageLinkForm;

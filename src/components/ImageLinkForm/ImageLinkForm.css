@@ -38,3 +38,8 @@ input {
     height: 0;
 
 }
+
+.longtext {
+    white-space: nowrap;
+    overflow: hidden;
+}
