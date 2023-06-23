@@ -1,8 +1,6 @@
 import React from "react";
 import PasswordBox from "../PasswordBox/PasswordBox";
-/*
-import SigninGuess from "../SigninGuess/SigninGuess"
-*/
+
 
 import Spinner from "../Spinner/Spinner";
 
@@ -39,9 +37,13 @@ class Signin extends React.Component {
             .then(res => res.json())
             .then(user => {
                 if (user.id) {
+/*
                     this.props.loadUser(user)
+*/
                     this.setState({spinner: false});
                     this.props.onRouteChange('home')
+                    localStorage.setItem("UserDataName", user.name)
+                    localStorage.setItem("UserDataEntries", user.entries)
                 }
             })
     }
@@ -52,18 +54,18 @@ class Signin extends React.Component {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                email: this.state.signInEmailGuess,
-                password: this.state.signInPasswordGuess
+                email: this.state.signInEmail,
+                password: this.state.signInPassword
             })
         })
             .then(res => res.json())
             .then(user => {
+                console.log("user", user);
                 if (user.id) {
                     this.props.loadUser(user)
                     this.setState({spinner: false});
                     this.props.onRouteChange('home')
                     localStorage.setItem("UserDataName", user.name)
-                    localStorage.setItem("UserDataEmail", user.email)
                     localStorage.setItem("UserDataEntries", user.entries)
                 }
             })

@@ -15,9 +15,9 @@ const initialState = {
     imagePath: '',
     box: [],
     imageData: {},
-    route: 'signin',
+    route: 'register',
     isSignedIn: false, // true or false
-    login: "login", //    'signin' or 'signout'
+    login: "", //  'signout' or empty ""
     user: {
         id: '',
         name: '',
@@ -33,7 +33,6 @@ class App extends Component {
         super();
         this.state = initialState
     }
-
 
     componentDidMount() {
         const UserDataName = localStorage.getItem("UserDataName")
@@ -138,31 +137,28 @@ class App extends Component {
             (error + 'error'))
     }
 
-    isSignedIn = (val) =>{
-        this.setState({isSignedIn:val});
-    }
 
     onRouteChange = (route) => {
-        if (route === 'signin') {
-            this.setState(initialState)
-        } else if (route === 'home') {
+            if (route === 'signin') {
+                this.setState(initialState)
+            }
+            this.setState({isSignedIn: false})
+            this.setState({route: route});
+            if (route === 'home') {
             this.setState({isSignedIn: true})
         }
-        this.setState({isSignedIn: false})
-        this.setState({route: route});
-
-    }
+        }
 
     render() {
         const {isSignedIn, box, route, imageUrl, imagePath} = this.state;
         return (
             <div className="App">
-                <button
+            {/*    <button
                     onClick={()=>{
                     this.setState({login:"signout"})
                     setTimeout(()=>console.log(this.state.login), 0);
                 }}
-                ></button>
+                ></button>*/}
                 <ParticlesBg type="cobweb" num={100} bg={true} v={800} color="#EEEEEE"/>
                 <Navigation isSignedIn={isSignedIn}
                             onRouteChange={this.onRouteChange}
