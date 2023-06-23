@@ -29,8 +29,8 @@ const initialState = {
 }
 
 class App extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = initialState
     }
 
@@ -84,6 +84,14 @@ class App extends Component {
         return box
     }
 
+    uploadImageUrl = (imageUrl) => {
+        this.setState({input: imageUrl})
+        this.setState({imageUrl: imageUrl})
+        this.setState({imagePath: ""})
+        this.setState({imageData: ""})
+        this.setState({box: []});
+    }
+
     DisplayFaceBox = (box) => {
         this.setState({box: box});
     }
@@ -106,6 +114,10 @@ class App extends Component {
     onButtonSubmit = () => {
         this.setState({box: []});
         this.setState({imageUrl: this.state.input});
+
+        setTimeout(()=>console.log("imageUrl", typeof(this.state.input)),0)
+        setTimeout(()=>console.log("imageUrl- on buttom submit", this.state.input),0)
+
         let formData = new FormData();
         formData.append('imageUrl', this.state.input)
         formData.append('imageData', this.state.imageData)
@@ -137,7 +149,6 @@ class App extends Component {
             (error + 'error'))
     }
 
-
     onRouteChange = (route) => {
             if (route === 'signin') {
                 this.setState(initialState)
@@ -153,12 +164,6 @@ class App extends Component {
         const {isSignedIn, box, route, imageUrl, imagePath} = this.state;
         return (
             <div className="App">
-            {/*    <button
-                    onClick={()=>{
-                    this.setState({login:"signout"})
-                    setTimeout(()=>console.log(this.state.login), 0);
-                }}
-                ></button>*/}
                 <ParticlesBg type="cobweb" num={100} bg={true} v={800} color="#EEEEEE"/>
                 <Navigation isSignedIn={isSignedIn}
                             onRouteChange={this.onRouteChange}
@@ -172,6 +177,7 @@ class App extends Component {
                             onInputChange={this.onInputChange}
                             onButtonSubmit={this.onButtonSubmit}
                             image64code={this.image64code}
+                            uploadImageUrl = {this.uploadImageUrl}
                         />
                         <FaceRecognition box={box} imageUrl={imageUrl} imagePath={imagePath}/>
                     </div>

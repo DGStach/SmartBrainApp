@@ -1,7 +1,7 @@
 import React from 'react';
 import './ImageLinkForm.css'
 
-const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code}) => {
+const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code, uploadImageUrl}) => {
     return (
         <div>
             <p className='f3'>
@@ -10,8 +10,9 @@ const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code}) => {
             <div className='center'>
                 <div className='form pa4 br3 shadow-5'>
                     <div className="photoInputs">
-                        <input id="photoHttp" clasename='placeholder f4 pa2 ' type='text' placeholder="past photo's url link" onChange={onInputChange}/>
-                       <div className='f3 pa2'> or </div>
+                        <input id="photoHttp" clasename='placeholder f4 pa2 ' type='text'
+                               placeholder="past photo's url link" onChange={onInputChange}/>
+                        <div className='f3 pa2'> or</div>
                         <form encType="multipart/form-data" action="/upload/image" method="post">
                             <label htmlFor="image-file" className=' grow f4 link ph3 pv2 dib white-90 choseFile'>Chose
                                 png/jpg file</label>
@@ -23,16 +24,23 @@ const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code}) => {
                     >Detect
                     </button>
                 </div>
-
             </div>
-                <div className="pv2 ph3 longtext">
+            <div className="pv2 ph3 longtext">
                 examples https:
-                <div>
-                    <button className='pv0.5 ph1 mr1 bg-white-10 ' >Use Link</button>
-                    https://raw.githubusercontent.com/DGStach/smartBrainAppFrontend/master/public/people.jpeg</div>
-                <div className="mt1">
-                    <button className='pv0.5 ph1 mr1 bg-white-10 ' >Use Link</button>
-                    https://raw.githubusercontent.com/DGStach/smartBrainAppBackend/master/controllers/a.png</div>
+                <div className="">
+                    <div>
+                        <button className='pv0.5 ph1 mr1 pt1 bg-white-10'
+                                onClick={() => uploadImageUrl("https://raw.githubusercontent.com/DGStach/smartBrainAppFrontend/master/public/people.jpeg")}>
+                            Use Link
+                        </button>
+                        https://raw.githubusercontent.com/DGStach/smartBrainAppFrontend/master/public/people.jpeg</div>
+                    <div className="mt1">
+                        <button className='pv0.5 ph1 mr1 pt1 bg-white-10'
+                                onClick={() => uploadImageUrl("https://raw.githubusercontent.com/DGStach/smartBrainAppBackend/master/controllers/a.png")}>
+                        Use Link</button>
+                        https://raw.githubusercontent.com/DGStach/smartBrainAppBackend/master/controllers/a.png
+                    </div>
+                </div>
             </div>
         </div>
     )
