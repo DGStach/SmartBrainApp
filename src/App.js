@@ -84,7 +84,7 @@ class App extends Component {
         return box
     }
 
-    uploadImageUrl = (imageUrl) => {
+    exampleImageUrl = (imageUrl) => {
         this.setState({input: imageUrl})
         this.setState({imageUrl: imageUrl})
         this.setState({imagePath: ""})
@@ -177,7 +177,7 @@ class App extends Component {
                             onInputChange={this.onInputChange}
                             onButtonSubmit={this.onButtonSubmit}
                             image64code={this.image64code}
-                            uploadImageUrl = {this.uploadImageUrl}
+                            exampleImageUrl = {this.exampleImageUrl}
                         />
                         <FaceRecognition box={box} imageUrl={imageUrl} imagePath={imagePath}/>
                     </div>

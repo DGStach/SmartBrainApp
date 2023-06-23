@@ -1,7 +1,7 @@
 import React from 'react';
 import './ImageLinkForm.css'
 
-const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code, uploadImageUrl}) => {
+const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code, exampleImageUrl}) => {
     return (
         <div>
             <p className='f3'>
@@ -30,13 +30,13 @@ const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code, uploadImageU
                 <div className="">
                     <div>
                         <button className='pv0.5 ph1 mr1 pt1 bg-white-10'
-                                onClick={() => uploadImageUrl("https://raw.githubusercontent.com/DGStach/smartBrainAppFrontend/master/public/people.jpeg")}>
+                                onClick={() => exampleImageUrl("https://raw.githubusercontent.com/DGStach/smartBrainAppFrontend/master/public/people.jpeg")}>
                             Use Link
                         </button>
                         https://raw.githubusercontent.com/DGStach/smartBrainAppFrontend/master/public/people.jpeg</div>
                     <div className="mt1">
                         <button className='pv0.5 ph1 mr1 pt1 bg-white-10'
-                                onClick={() => uploadImageUrl("https://raw.githubusercontent.com/DGStach/smartBrainAppBackend/master/controllers/a.png")}>
+                                onClick={() => exampleImageUrl("https://raw.githubusercontent.com/DGStach/smartBrainAppBackend/master/controllers/a.png")}>
                         Use Link</button>
                         https://raw.githubusercontent.com/DGStach/smartBrainAppBackend/master/controllers/a.png
                     </div>
