@@ -167,7 +167,7 @@ class App extends Component {
                             sessionOF = {this.sessionOF}
                 />
                 {route === 'home'
-                    ? <div>
+                    ? <div onKeyPress={(e)=>{if(e.key === "Enter"){this.onButtonSubmit()}}} >
                         <Logo/>
                         <Rank name={this.state.user.name} entries={this.state.user.entries}/>
                         <ImageLinkForm
