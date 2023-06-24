@@ -2,6 +2,7 @@ import React from 'react';
 import './ImageLinkForm.css'
 
 const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code, exampleImageUrl}) => {
+
     return (
         <div>
             <p className='f3'>
@@ -10,8 +11,10 @@ const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code, exampleImage
             <div className='center'>
                 <div className='form pa4 br3 shadow-5'>
                     <div className="photoInputs">
-                        <input id="photoHttp" clasename='placeholder f4 pa2 ' type='text'
-                               placeholder="past photo's url link" onChange={onInputChange}/>
+                        <input
+                            id="photoHttp" clasename='placeholder f4 pa2 ' type='text'
+                               placeholder="past photo's url link" onChange={onInputChange}
+                        />
                         <div className='f3 pa2'> or</div>
                         <form encType="multipart/form-data" action="/upload/image" method="post">
                             <label htmlFor="image-file" className=' grow f4 link ph3 pv2 dib white-90 choseFile'>Chose
