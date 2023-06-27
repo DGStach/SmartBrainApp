@@ -41,19 +41,19 @@ class App extends Component {
 
         if (UserDataName) {
             this.setState({route: "home"})
-            this.setState({isSignedIn:true})
-            this.setState({user:{name: UserDataName,entries: UserDataEntries, id: UserDataId }})
+            this.setState({isSignedIn: true})
+            this.setState({user: {name: UserDataName, entries: UserDataEntries, id: UserDataId}})
         }
 
-        if (this.state.login === "signout"){
+        if (this.state.login === "signout") {
             localStorage.removeItem("UserDataName")
             localStorage.removeItem("UserDataEntries")
             localStorage.removeItem("UserDataId")
         }
     }
 
-    sessionOF = (login) =>{
-        this.setState({login : login})
+    sessionOF = (login) => {
+        this.setState({login: login})
         localStorage.removeItem("UserDataName")
         localStorage.removeItem("UserDataEntries")
         localStorage.removeItem("UserDataId")
@@ -90,12 +90,8 @@ class App extends Component {
     }
 
     exampleImageUrl = (imageUrl) => {
-        this.setState({input: imageUrl})
-        this.setState({imageUrl: imageUrl})
-        this.setState({imagePath: ""})
-        this.setState({imageData: ""})
-        this.setState({box: []});
-        setTimeout(()=>this.onButtonSubmit(),0)
+        this.setState({input: imageUrl, imageUrl: imageUrl, imagePath: "", imageData: "", box: []});
+        setTimeout(() => this.onButtonSubmit(), 0)
     }
 
     DisplayFaceBox = (box) => {
@@ -104,22 +100,21 @@ class App extends Component {
 
     onInputChange = (event) => {
         //input - data from http picture
-        this.setState({input: event.target.value})
-        this.setState({imagePath: ""})
-        this.setState({imageData: ""})
+        this.setState({input: event.target.value, imagePath: "", imageData: ""})
     }
     image64code = (event) => {
         // image Data - data from png/url photo
-        this.setState({imageData: event.target.files[0]})
-        this.setState({imagePath: event.target.value})
-        this.setState({input: ""})
-        this.setState({imageUrl: ""})
-        this.setState({box: []});
+        this.setState({
+            imageData: event.target.files[0],
+            imagePath: event.target.value,
+            input: "",
+            imageUrl: "",
+            box: []
+        });
     }
 
     onButtonSubmit = () => {
-        this.setState({box: []});
-        this.setState({imageUrl: this.state.input});
+        this.setState({box: [], imageUrl: this.state.input});
 
         let formData = new FormData();
         formData.append('imageUrl', this.state.input)
@@ -144,8 +139,9 @@ class App extends Component {
                         .then(count => {
                             this.setState(Object.assign(this.state.user, {entries: count.entries}));
                         })
-                };
-                if (response.status.description === "Failure"){
+                }
+                ;
+                if (response.status.description === "Failure") {
                     alert(response.outputs[0].status.description)
                 }
             })
@@ -154,15 +150,15 @@ class App extends Component {
     }
 
     onRouteChange = (route) => {
-            if (route === 'signin') {
-                this.setState(initialState)
-            }
-            this.setState({isSignedIn: false})
-            this.setState({route: route});
-            if (route === 'home') {
+        if (route === 'signin') {
+            this.setState(initialState)
+        }
+        this.setState({isSignedIn: false})
+        this.setState({route: route});
+        if (route === 'home') {
             this.setState({isSignedIn: true})
         }
-        }
+    }
 
     render() {
         const {isSignedIn, box, route, imageUrl, imagePath} = this.state;
@@ -173,17 +169,21 @@ class App extends Component {
                 <ParticlesBg type="cobweb" num={100} bg={true} v={800} color="#EEEEEE"/>
                 <Navigation isSignedIn={isSignedIn}
                             onRouteChange={this.onRouteChange}
-                            sessionOF = {this.sessionOF}
+                            sessionOF={this.sessionOF}
                 />
                 {route === 'home'
-                    ? <div onKeyPress={(e)=>{if(e.key === "Enter"){this.onButtonSubmit()}}} >
+                    ? <div onKeyPress={(e) => {
+                        if (e.key === "Enter") {
+                            this.onButtonSubmit()
+                        }
+                    }}>
                         <Logo/>
                         <Rank name={name} entries={entries}/>
                         <ImageLinkForm
                             onInputChange={this.onInputChange}
                             onButtonSubmit={this.onButtonSubmit}
                             image64code={this.image64code}
-                            exampleImageUrl = {this.exampleImageUrl}
+                            exampleImageUrl={this.exampleImageUrl}
                         />
                         <FaceRecognition box={box} imageUrl={imageUrl} imagePath={imagePath}/>
                     </div>
