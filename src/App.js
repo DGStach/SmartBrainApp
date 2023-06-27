@@ -145,6 +145,9 @@ class App extends Component {
                             this.setState(Object.assign(this.state.user, {entries: count.entries}));
                         })
                 };
+                if (response.status.description === "Failure"){
+                    alert(response.outputs[0].status.description)
+                }
             })
             .catch(error => console.log
             (error + 'error'))
