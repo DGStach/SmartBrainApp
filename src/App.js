@@ -35,15 +35,20 @@ class App extends Component {
     }
 
     componentDidMount() {
+        const UserDataEntries = localStorage.getItem("UserDataEntries")
+        const UserDataId = localStorage.getItem("UserDataId")
         const UserDataName = localStorage.getItem("UserDataName")
+
         if (UserDataName) {
             this.setState({route: "home"})
             this.setState({isSignedIn:true})
+            this.setState({user:{name: UserDataName,entries: UserDataEntries, id: UserDataId }})
         }
+
         if (this.state.login === "signout"){
             localStorage.removeItem("UserDataName")
             localStorage.removeItem("UserDataEntries")
-
+            localStorage.removeItem("UserDataId")
         }
     }
 
@@ -51,8 +56,8 @@ class App extends Component {
         this.setState({login : login})
         localStorage.removeItem("UserDataName")
         localStorage.removeItem("UserDataEntries")
+        localStorage.removeItem("UserDataId")
     }
-
 
     loadUser = (data) => {
         this.setState({
@@ -120,7 +125,7 @@ class App extends Component {
         formData.append('imageUrl', this.state.input)
         formData.append('imageData', this.state.imageData)
 
-        fetch('http://localhost:3002/imageurl', {
+        fetch('http://localhost:3001/imageurl', {
             method: 'post',
             body: formData
         })
@@ -128,7 +133,7 @@ class App extends Component {
             .then(response => {
                 if (response.status.description === "Ok") {
                     this.DisplayFaceBox(this.Coordinates(response))
-                    fetch('http://localhost:3002/image', {
+                    fetch('http://localhost:3001/image', {
                         method: 'put',
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify({
@@ -137,10 +142,9 @@ class App extends Component {
                     })
                         .then(res => res.json())
                         .then(count => {
-                            this.setState(Object.assign(this.state.user, {entries: count.entries}))
+                            this.setState(Object.assign(this.state.user, {entries: count.entries}));
                         })
-                        .catch(console.log)
-                }
+                };
             })
             .catch(error => console.log
             (error + 'error'))
@@ -159,6 +163,8 @@ class App extends Component {
 
     render() {
         const {isSignedIn, box, route, imageUrl, imagePath} = this.state;
+        const {name, entries} = this.state.user;
+
         return (
             <div className="App">
                 <ParticlesBg type="cobweb" num={100} bg={true} v={800} color="#EEEEEE"/>
@@ -169,7 +175,7 @@ class App extends Component {
                 {route === 'home'
                     ? <div onKeyPress={(e)=>{if(e.key === "Enter"){this.onButtonSubmit()}}} >
                         <Logo/>
-                        <Rank name={this.state.user.name} entries={this.state.user.entries}/>
+                        <Rank name={name} entries={entries}/>
                         <ImageLinkForm
                             onInputChange={this.onInputChange}
                             onButtonSubmit={this.onButtonSubmit}

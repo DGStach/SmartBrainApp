@@ -1,16 +1,7 @@
 import React from 'react';
 
 const Rank = ({name, entries}) => {
-
-    const UserDataName = localStorage.getItem("UserDataName")
-    const UserDataEntries = localStorage.getItem("UserDataEntries")
-
-
-    if (UserDataName) {
-        name = UserDataName;
-        entries = UserDataEntries;
-    }
-
+    localStorage.setItem("UserDataEntries", entries)
     return (
         <div>
             <div className='white f3'>

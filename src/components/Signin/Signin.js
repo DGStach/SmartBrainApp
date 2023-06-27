@@ -60,11 +60,12 @@ class Signin extends React.Component {
         })
             .then(res => res.json())
             .then(user => {
-                console.log("user", user);
+                console.log("user on submit button", user);
                 if (user.id) {
                     this.props.loadUser(user)
                     this.setState({spinner: false});
                     this.props.onRouteChange('home')
+                    localStorage.setItem("UserDataId", user.id)
                     localStorage.setItem("UserDataName", user.name)
                     localStorage.setItem("UserDataEntries", user.entries)
                 }
