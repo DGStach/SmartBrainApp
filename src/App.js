@@ -18,6 +18,7 @@ const initialState = {
     route: 'register',
     isSignedIn: false, // true or false
     login: "", //  'signout' or empty ""
+    message:"",
     user: {
         id: '',
         name: '',
@@ -69,6 +70,10 @@ class App extends Component {
                 joined: data.joined
             }
         })
+        localStorage.setItem("UserDataName", data.name)
+        localStorage.setItem("UserDataEntries", data.entries)
+        localStorage.setItem("UserDataEntries", data.id)
+
     }
 
     Coordinates = (data) => {
@@ -100,7 +105,7 @@ class App extends Component {
 
     onInputChange = (event) => {
         //input - data from http picture
-        this.setState({input: event.target.value, imagePath: "", imageData: ""})
+        this.setState({input: event.target.value, imagePath: "", imageData: "", message:""})
     }
     image64code = (event) => {
         // image Data - data from png/url photo
@@ -109,7 +114,8 @@ class App extends Component {
             imagePath: event.target.value,
             input: "",
             imageUrl: "",
-            box: []
+            box: [],
+            message:""
         });
     }
 
@@ -127,6 +133,11 @@ class App extends Component {
             .then(response => response.json())
             .then(response => {
                 if (response.status.description === "Ok") {
+                    window.response = response
+                    if (response.outputs.data === undefined){
+                        console.log("lack of face in the picture")
+                        this.setState({message : "lack of face in the picture"})
+                    }
                     this.DisplayFaceBox(this.Coordinates(response))
                     fetch('http://localhost:3001/image', {
                         method: 'put',
@@ -140,11 +151,13 @@ class App extends Component {
                             this.setState(Object.assign(this.state.user, {entries: count.entries}));
                         })
                 }
-                ;
                 if (response.status.description === "Failure") {
-                    alert(response.outputs[0].status.description)
+                    this.setState({message : "incorrect photo format"})
                 }
+
+
             })
+            .then(()=>console.log())
             .catch(error => console.log
             (error + 'error'))
     }
@@ -161,7 +174,7 @@ class App extends Component {
     }
 
     render() {
-        const {isSignedIn, box, route, imageUrl, imagePath} = this.state;
+        const {isSignedIn, box, route, imageUrl, imagePath, message} = this.state;
         const {name, entries} = this.state.user;
 
         return (
@@ -180,10 +193,12 @@ class App extends Component {
                         <Logo/>
                         <Rank name={name} entries={entries}/>
                         <ImageLinkForm
+                            message = {message}
                             onInputChange={this.onInputChange}
                             onButtonSubmit={this.onButtonSubmit}
                             image64code={this.image64code}
                             exampleImageUrl={this.exampleImageUrl}
+
                         />
                         <FaceRecognition box={box} imageUrl={imageUrl} imagePath={imagePath}/>
                     </div>

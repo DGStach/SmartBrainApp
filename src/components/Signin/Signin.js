@@ -11,8 +11,8 @@ class Signin extends React.Component {
             signInEmail: "",
             signInPassword: "",
             spinner: false,
-            signInEmailGuess: "Guess@gmail.com",
-            signInPasswordGuess: "Guess@gmail.com",
+            signInEmailGuess: "Dagmarka1@wp.pl",
+            signInPasswordGuess: "Dagmarka1@wp.pl",
         }
     }
 
@@ -26,7 +26,12 @@ class Signin extends React.Component {
 
     onSubmitSignInGuess = () => {
         this.setState({spinner: true});
+
+        let a = new Date()
+/*
         fetch('https://smartbrainappbackend.onrender.com/signin', {
+*/
+        fetch('http://localhost:3001/signin', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -36,21 +41,22 @@ class Signin extends React.Component {
         })
             .then(res => res.json())
             .then(user => {
+                let b = new Date()
+                console.log("duration", a-b);
                 if (user.id) {
-/*
                     this.props.loadUser(user)
-*/
                     this.setState({spinner: false});
                     this.props.onRouteChange('home')
-                    localStorage.setItem("UserDataName", user.name)
-                    localStorage.setItem("UserDataEntries", user.entries)
                 }
             })
     }
 
     onSubmitSignIn = () => {
+
         this.setState({spinner: true});
-        fetch('https://smartbrainappbackend.onrender.com/signin', {
+        let a = new Date()
+
+        fetch('http://localhost:3001/signin', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -60,16 +66,16 @@ class Signin extends React.Component {
         })
             .then(res => res.json())
             .then(user => {
-                console.log("user on submit button", user);
+                let b = new Date()
+                console.log("duration", a-b);
                 if (user.id) {
                     this.props.loadUser(user)
                     this.setState({spinner: false});
                     this.props.onRouteChange('home')
-                    localStorage.setItem("UserDataId", user.id)
-                    localStorage.setItem("UserDataName", user.name)
-                    localStorage.setItem("UserDataEntries", user.entries)
                 }
             })
+        this.setState({spinner: false});
+
     }
 
     render() {

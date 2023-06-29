@@ -1,7 +1,7 @@
 import React from 'react';
 import './ImageLinkForm.css'
 
-const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code, exampleImageUrl}) => {
+const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code, exampleImageUrl,message}) => {
 
     return (
         <div>
@@ -44,6 +44,9 @@ const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code, exampleImage
                         https://raw.githubusercontent.com/DGStach/smartBrainAppBackend/master/controllers/a.png
                     </div>
                 </div>
+            </div>
+            <div className='pt3 f3 b'>
+                {message}
             </div>
         </div>
     )

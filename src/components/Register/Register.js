@@ -34,7 +34,8 @@ class Register extends React.Component {
 
     onSubmitSignInGuess = () => {
         this.setState({spinner: true});
-        fetch('https://smartbrainappbackend.onrender.com/signin', {
+        let a = new Date()
+        fetch('http://localhost:3001/signin', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -44,6 +45,8 @@ class Register extends React.Component {
         })
             .then(res => res.json())
             .then(user => {
+                let b = new Date()
+                console.log("duration", a-b)
                 if (user.id) {
                     this.props.loadUser(user)
                     this.setState({spinner: false});
@@ -84,7 +87,8 @@ class Register extends React.Component {
         }
         this.setState({spinner: true})
 
-        fetch("https://smartbrainappbackend.onrender.com/register", {
+        let a = new Date()
+        fetch("http://localhost:3001/register", {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -96,6 +100,9 @@ class Register extends React.Component {
         })
             .then(res => res.json())
             .then(user => {
+                let b = new Date()
+                console.log("duration", a-b)
+
                 if (user.id) {
                     this.props.loadUser(user);
                     this.setState({spinner: false})
