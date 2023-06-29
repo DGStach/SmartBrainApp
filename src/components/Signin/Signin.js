@@ -1,8 +1,6 @@
 import React from "react";
 import PasswordBox from "../PasswordBox/PasswordBox";
-import onSubmitSignInGuess from "../onSubmitSignInGuess/onSubmitSignInGuess";
-
-
+import onSubmitSignInGuess from "../onSubmitSignInGuess/onSubmitSignInGuess"
 import Spinner from "../Spinner/Spinner";
 
 class Signin extends React.Component {
@@ -107,13 +105,15 @@ class Signin extends React.Component {
                                 type="button"
                                 value="Sign in"/>
                         </div>
-                        <div>
+                        <onSubmitSignInGuess/>
+
+                       {/* <div>
                             <input
                                 onClick={this.onSubmitSignInGuess}
                                 className="b mt2 ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                                 type="button"
                                 value="Login as Guess"/>
-                        </div>
+                        </div>*/}
                         <i className="fa fa-eye-slash" aria-hidden="false"></i>
                         <div className="lh-copy mt3">
                             <p onClick={() => {
