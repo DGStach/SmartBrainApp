@@ -8,6 +8,8 @@ import ParticlesBg from 'particles-bg';
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import Signin from "./components/Signin/Signin";
 import Register from "./components/Register/Register";
+import Spinner from "./components/Spinner/Spinner"
+
 
 const initialState = {
     input: '',
@@ -19,6 +21,7 @@ const initialState = {
     isSignedIn: false, // true or false
     login: "", //  'signout' or empty ""
     message:"",
+    spinner: false,
     user: {
         id: '',
         name: '',
@@ -95,12 +98,12 @@ class App extends Component {
     }
 
     exampleImageUrl = (imageUrl) => {
-        this.setState({input: imageUrl, imageUrl: imageUrl, imagePath: "", imageData: "", box: []});
+        this.setState({input: imageUrl, imageUrl: imageUrl, imagePath: "", imageData: "",message:"" ,box: []});
         setTimeout(() => this.onButtonSubmit(), 0)
     }
 
     DisplayFaceBox = (box) => {
-        this.setState({box: box});
+        this.setState({box: box, spinner: false});
     }
 
     onInputChange = (event) => {
@@ -120,11 +123,13 @@ class App extends Component {
     }
 
     onButtonSubmit = () => {
-        this.setState({box: [], imageUrl: this.state.input});
+        console.log("START onButtonSubmit")
 
+        this.setState({box: [], imageUrl: this.state.input});
         let formData = new FormData();
         formData.append('imageUrl', this.state.input)
         formData.append('imageData', this.state.imageData)
+        this.setState({spinner: true});
 
         fetch('http://localhost:3001/imageurl', {
             method: 'post',
@@ -134,10 +139,11 @@ class App extends Component {
             .then(response => {
                 if (response.status.description === "Ok") {
                     window.response = response
-                    if (response.outputs.data === undefined){
-                        console.log("lack of face in the picture")
-                        this.setState({message : "lack of face in the picture"})
-                    }
+                    /*                    if (response.outputs.data === undefined){
+                    /!*
+                                            this.setState({message : "lack of face in the picture"})
+                    *!/
+                                        }*/
                     this.DisplayFaceBox(this.Coordinates(response))
                     fetch('http://localhost:3001/image', {
                         method: 'put',
@@ -152,14 +158,15 @@ class App extends Component {
                         })
                 }
                 if (response.status.description === "Failure") {
-                    this.setState({message : "incorrect photo format"})
+                    this.setState({message: "incorrect photo format", spinner: false})
+
                 }
-
-
             })
-            .then(()=>console.log())
-            .catch(error => console.log
-            (error + 'error'))
+            .catch(error => {
+                console.log(error + 'error');
+                this.setState({spinner: false})
+            })
+        console.log("END onButtonSubmit")
     }
 
     onRouteChange = (route) => {
@@ -174,7 +181,7 @@ class App extends Component {
     }
 
     render() {
-        const {isSignedIn, box, route, imageUrl, imagePath, message} = this.state;
+        const {isSignedIn, box, route, imageUrl, imagePath, message, spinner} = this.state;
         const {name, entries} = this.state.user;
 
         return (
@@ -198,8 +205,8 @@ class App extends Component {
                             onButtonSubmit={this.onButtonSubmit}
                             image64code={this.image64code}
                             exampleImageUrl={this.exampleImageUrl}
-
                         />
+                        <Spinner spinnerState={spinner}/>
                         <FaceRecognition box={box} imageUrl={imageUrl} imagePath={imagePath}/>
                     </div>
                     : (route === 'signin'
