@@ -14,8 +14,8 @@ class Register extends React.Component {
             errMessage: '',
             passType: "password",
             spinner: false,
-            signInEmailGuess: "Guess@gmail.com",
-            signInPasswordGuess: "Guess@gmail.com",
+            signInEmailGuess: "onSubmitSignInGuess@gmail.com",
+            signInPasswordGuess: "onSubmitSignInGuess@gmail.com",
         }
     }
 
