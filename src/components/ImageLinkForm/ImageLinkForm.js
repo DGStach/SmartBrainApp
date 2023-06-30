@@ -1,5 +1,6 @@
 import React from 'react';
 import './ImageLinkForm.css'
+import UseLink from "../UseLink/UseLink";
 
 const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code, exampleImageUrl,message}) => {
 
@@ -32,16 +33,12 @@ const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code, exampleImage
                 examples https:
                 <div className="">
                     <div>
-                        <button className='pv0.5 ph1 mr1 pt1 bg-white-10'
-                                onClick={() => exampleImageUrl("https://raw.githubusercontent.com/DGStach/smartBrainAppFrontend/master/public/people.jpeg")}>
-                            Use Link
-                        </button>
-                        https://raw.githubusercontent.com/DGStach/smartBrainAppFrontend/master/public/people.jpeg</div>
-                    <div className="mt1">
-                        <button className='pv0.5 ph1 mr1 pt1 bg-white-10'
-                                onClick={() => exampleImageUrl("https://raw.githubusercontent.com/DGStach/smartBrainAppBackend/master/controllers/a.png")}>
-                        Use Link</button>
-                        https://raw.githubusercontent.com/DGStach/smartBrainAppBackend/master/controllers/a.png
+                        <div onClick={() => exampleImageUrl("https://raw.githubusercontent.com/DGStach/smartBrainAppFrontend/master/public/people.jpeg")} >
+                            <UseLink/>
+                        </div>
+                        <div onClick={() => exampleImageUrl("https://raw.githubusercontent.com/DGStach/smartBrainAppBackend/master/controllers/a.png")} >
+                            <UseLink/>
+                        </div>
                     </div>
                 </div>
             </div>

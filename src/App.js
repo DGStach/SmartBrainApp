@@ -138,12 +138,6 @@ class App extends Component {
             .then(response => response.json())
             .then(response => {
                 if (response.status.description === "Ok") {
-                    window.response = response
-                    /*                    if (response.outputs.data === undefined){
-                    /!*
-                                            this.setState({message : "lack of face in the picture"})
-                    *!/
-                                        }*/
                     this.DisplayFaceBox(this.Coordinates(response))
                     fetch('http://localhost:3001/image', {
                         method: 'put',
@@ -173,8 +167,7 @@ class App extends Component {
         if (route === 'signin') {
             this.setState(initialState)
         }
-        this.setState({isSignedIn: false})
-        this.setState({route: route});
+        this.setState({isSignedIn: false, route: route});
         if (route === 'home') {
             this.setState({isSignedIn: true})
         }
