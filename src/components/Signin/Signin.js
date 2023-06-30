@@ -1,6 +1,5 @@
 import React from "react";
 import PasswordBox from "../PasswordBox/PasswordBox";
-import onSubmitSignInGuess from "../onSubmitSignInGuess/onSubmitSignInGuess"
 import Spinner from "../Spinner/Spinner";
 
 class Signin extends React.Component {
@@ -11,7 +10,7 @@ class Signin extends React.Component {
             signInPassword: "",
             spinner: false,
             signInEmailGuess: "Dagmarka1@wp.pl",
-            signInPasswordGuess: "Dagmarka1@wp.pl",
+            signInPasswordGuess: "Dagmarka1@wp.pl"
         }
     }
 
@@ -23,34 +22,7 @@ class Signin extends React.Component {
         this.setState({signInPassword: event.target.value})
     }
 
- /*   onSubmitSignInGuess = () => {
-        this.setState({spinner: true});
-
-        let a = new Date()
-/!*
-        fetch('https://smartbrainappbackend.onrender.com/signin', {
-*!/
-        fetch('http://localhost:3001/signin', {
-            method: 'post',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                email: this.state.signInEmailGuess,
-                password: this.state.signInPasswordGuess
-            })
-        })
-            .then(res => res.json())
-            .then(user => {
-                let b = new Date()
-                console.log("duration", a-b);
-                if (user.id) {
-                    this.props.loadUser(user)
-                    this.setState({spinner: false});
-                    this.props.onRouteChange('home')
-                }
-            })
-    }*/
-
-    onSubmitSignIn = () => {
+    onSubmitSignIn = (data) => {
 
         this.setState({spinner: true});
         let a = new Date()
@@ -58,15 +30,12 @@ class Signin extends React.Component {
         fetch('http://localhost:3001/signin', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                email: this.state.signInEmail,
-                password: this.state.signInPassword
-            })
+            body: JSON.stringify(data)
         })
             .then(res => res.json())
             .then(user => {
                 let b = new Date()
-                console.log("duration", a-b);
+                console.log("duration", a - b);
                 if (user.id) {
                     this.props.loadUser(user)
                     this.setState({spinner: false});
@@ -77,8 +46,10 @@ class Signin extends React.Component {
 
     }
 
+
     render() {
         const {onRouteChange} = this.props;
+                const {signInPasswordGuess,signInPassword, signInEmailGuess, signInEmail, spinner} = this.state
 
         return (
             <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
@@ -97,23 +68,29 @@ class Signin extends React.Component {
                             </div>
                             <PasswordBox onPasswordChange={this.onPasswordChange}/>
                         </fieldset>
-                        <Spinner spinnerState={this.state.spinner}/>
+                        <Spinner spinnerState={spinner}/>
                         <div>
                             <input
-                                onClick={this.onSubmitSignIn}
+                                onClick={() => {
+                                    this.onSubmitSignIn({
+                                        email: signInEmail,
+                                        password: signInPassword
+                                    })
+                                }}
                                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                                 type="button"
                                 value="Sign in"/>
                         </div>
-                        <onSubmitSignInGuess/>
-
-                       {/* <div>
+                        <div>
                             <input
-                                onClick={this.onSubmitSignInGuess}
+                                onClick={() => this.onSubmitSignIn({
+                                    email: signInEmailGuess,
+                                    password: signInPasswordGuess
+                                })}
                                 className="b mt2 ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                                 type="button"
                                 value="Login as Guess"/>
-                        </div>*/}
+                        </div>
                         <i className="fa fa-eye-slash" aria-hidden="false"></i>
                         <div className="lh-copy mt3">
                             <p onClick={() => {

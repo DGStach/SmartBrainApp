@@ -28,8 +28,7 @@ class Register extends React.Component {
     }
 
     onPasswordChange = (event) => {
-        this.setState({password: event.target.value})
-        this.setState({errMessage: ''})
+        this.setState({password: event.target.value, errMessage: ''})
     }
 
     onSubmitSignInGuess = () => {
@@ -109,8 +108,7 @@ class Register extends React.Component {
                     this.props.onRouteChange('home');
                 }
                 else {
-                    this.setState({spinner: false})
-                    this.setState({errMessage: "email address is already in use"})
+                    this.setState({spinner: false, errMessage: "email address is already in use"})
                 }
             }).catch(err=>{console.log("catch register", err)});
     }

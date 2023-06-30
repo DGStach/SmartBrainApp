@@ -17,7 +17,7 @@ const initialState = {
     imagePath: '',
     box: [],
     imageData: {},
-    route: 'register',
+    route: 'signin',
     isSignedIn: false, // true or false
     login: "", //  'signout' or empty ""
     message:"",
