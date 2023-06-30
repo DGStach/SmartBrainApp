@@ -14,8 +14,6 @@ class Register extends React.Component {
             errMessage: '',
             passType: "password",
             spinner: false,
-            signInEmailGuess: "Guess@gmail.com",
-            signInPasswordGuess: "Guess@gmail.com",
         }
     }
 
@@ -28,8 +26,7 @@ class Register extends React.Component {
     }
 
     onPasswordChange = (event) => {
-        this.setState({password: event.target.value})
-        this.setState({errMessage: ''})
+        this.setState({password: event.target.value, errMessage: ''})
     }
 
     onSubmitSignInGuess = () => {
@@ -39,8 +36,8 @@ class Register extends React.Component {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                email: this.state.signInEmailGuess,
-                password: this.state.signInPasswordGuess
+                email: "Dagmarka1@wp.pl",
+                password: "Dagmarka1@wp.pl"
             })
         })
             .then(res => res.json())
@@ -109,8 +106,7 @@ class Register extends React.Component {
                     this.props.onRouteChange('home');
                 }
                 else {
-                    this.setState({spinner: false})
-                    this.setState({errMessage: "email address is already in use"})
+                    this.setState({spinner: false, errMessage: "email address is already in use"})
                 }
             }).catch(err=>{console.log("catch register", err)});
     }
