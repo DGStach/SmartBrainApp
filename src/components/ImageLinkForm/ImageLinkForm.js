@@ -2,8 +2,7 @@ import React from 'react';
 import './ImageLinkForm.css'
 import UseLink from "../UseLink/UseLink";
 
-const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code, exampleImageUrl,message}) => {
-
+const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code,imageUrl, exampleImageUrl,message}) => {
     return (
         <div>
             <p className='f3'>
@@ -30,8 +29,8 @@ const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code, exampleImage
                 </div>
             </div>
             <div className="pv2 ph3 longtext">
-                <div className="">
-                    <div>
+                 https example:
+                    <div className="inline-flex center">
                         <div onClick={() => exampleImageUrl("https://raw.githubusercontent.com/DGStach/smartBrainAppFrontend/master/public/people.jpeg")} >
                             <UseLink/>
                         </div>
@@ -39,7 +38,6 @@ const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code, exampleImage
                             <UseLink/>
                         </div>
                     </div>
-                </div>
             </div>
             <div className='pt3 f3 b'>
                 {message}

@@ -9,6 +9,7 @@ import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import Signin from "./components/Signin/Signin";
 import Register from "./components/Register/Register";
 import Spinner from "./components/Spinner/Spinner"
+import faceRecognition from "./components/FaceRecognition/FaceRecognition";
 
 
 const initialState = {
@@ -98,16 +99,17 @@ class App extends Component {
 
     exampleImageUrl = (imageUrl) => {
         this.setState({input: imageUrl, imageUrl: imageUrl, imagePath: "", imageData: "",message:"" ,box: []});
-        setTimeout(() => this.onButtonSubmit(), 0)
+        setTimeout(() => {this.onButtonSubmit(); console.log("imageURL state", this.state.imageUrl)}, 0);
     }
 
     DisplayFaceBox = (box) => {
-        this.setState({box: box, spinner: false});
+        this.setState({box: box, spinner:false});
     }
 
     onInputChange = (event) => {
         //input - data from http picture
         this.setState({input: event.target.value, imagePath: "", imageData: "", message:""})
+
     }
     image64code = (event) => {
         // image Data - data from png/url photo
@@ -122,8 +124,7 @@ class App extends Component {
     }
 
     onButtonSubmit = () => {
-        console.log("START onButtonSubmit")
-
+        console.log("on Button Submit")
         this.setState({box: [], imageUrl: this.state.input});
         let formData = new FormData();
         formData.append('imageUrl', this.state.input)
@@ -147,6 +148,7 @@ class App extends Component {
                     })
                         .then(res => res.json())
                         .then(count => {
+                            console.log("count fun");
                             this.setState(Object.assign(this.state.user, {entries: count.entries}));
                         })
                 }
@@ -175,7 +177,7 @@ class App extends Component {
     render() {
         const {isSignedIn, box, route, imageUrl, imagePath, message, spinner} = this.state;
         const {name, entries} = this.state.user;
-
+        console.log("imageUrl render ", {imageUrl})
         return (
             <div className="App">
                 <ParticlesBg type="cobweb" num={100} bg={true} v={800} color="#EEEEEE"/>
@@ -197,6 +199,7 @@ class App extends Component {
                             onButtonSubmit={this.onButtonSubmit}
                             image64code={this.image64code}
                             exampleImageUrl={this.exampleImageUrl}
+                            imageUrl ={imageUrl}
                         />
                         <Spinner spinnerState={spinner}/>
                         <FaceRecognition box={box} imageUrl={imageUrl} imagePath={imagePath}/>
