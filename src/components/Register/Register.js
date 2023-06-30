@@ -14,8 +14,6 @@ class Register extends React.Component {
             errMessage: '',
             passType: "password",
             spinner: false,
-            signInEmailGuess: "onSubmitSignInGuess@gmail.com",
-            signInPasswordGuess: "onSubmitSignInGuess@gmail.com",
         }
     }
 
@@ -38,8 +36,8 @@ class Register extends React.Component {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                email: this.state.signInEmailGuess,
-                password: this.state.signInPasswordGuess
+                email: "Dagmarka1@wp.pl",
+                password: "Dagmarka1@wp.pl"
             })
         })
             .then(res => res.json())

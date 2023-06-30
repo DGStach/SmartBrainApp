@@ -44,8 +44,7 @@ class App extends Component {
         const UserDataName = localStorage.getItem("UserDataName")
 
         if (UserDataName) {
-            this.setState({route: "home"})
-            this.setState({isSignedIn: true})
+            this.setState({route: "home", isSignedIn: true})
             this.setState({user: {name: UserDataName, entries: UserDataEntries, id: UserDataId}})
         }
 
