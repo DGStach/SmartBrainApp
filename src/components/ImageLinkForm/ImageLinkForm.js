@@ -30,7 +30,6 @@ const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code, exampleImage
                 </div>
             </div>
             <div className="pv2 ph3 longtext">
-                examples https:
                 <div className="">
                     <div>
                         <div onClick={() => exampleImageUrl("https://raw.githubusercontent.com/DGStach/smartBrainAppFrontend/master/public/people.jpeg")} >
