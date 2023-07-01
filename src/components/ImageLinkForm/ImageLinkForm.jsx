@@ -2,7 +2,7 @@ import React from 'react';
 import './ImageLinkForm.css'
 import UseLink from "../UseLink/UseLink";
 
-const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code, imageUrl, exampleImageUrl, message}) => {
+const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code, exampleImageUrl, message}) => {
     let link1 = "https://raw.githubusercontent.com/DGStach/smartBrainAppFrontend/master/public/people.jpeg";
     let link2 = "https://identity-mag.com/wp-content/uploads/2017/04/concert-audience-fans-at-a-concert-o.jpg";
     let link3 = "https://media1.popsugar-assets.com/files/thumbor/6TyTdApcuH5wEB0tNCS2W1FBsfg/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2020/03/10/740/n/24155406/17e998b8008adf20_GettyImages-1132179376/i/angelina-jolie-brad-pitt-kids.jpg";

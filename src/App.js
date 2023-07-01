@@ -11,7 +11,6 @@ import Register from "./components/Register/Register";
 import Spinner from "./components/Spinner/Spinner"
 import faceRecognition from "./components/FaceRecognition/FaceRecognition";
 
-
 const initialState = {
     input: '',
     imageUrl: '',
@@ -99,7 +98,7 @@ class App extends Component {
 
     exampleImageUrl = (imageUrl) => {
         this.setState({input: imageUrl, imageUrl: imageUrl, imagePath: "", imageData: "",message:"" ,box: []});
-        setTimeout(() => {this.onButtonSubmit(); console.log("imageURL state", this.state.imageUrl)}, 0);
+        setTimeout(() => {this.onButtonSubmit()}, 0);
     }
 
     DisplayFaceBox = (box) => {
@@ -124,14 +123,13 @@ class App extends Component {
     }
 
     onButtonSubmit = () => {
-        console.log("on Button Submit")
         this.setState({box: [], imageUrl: this.state.input});
         let formData = new FormData();
         formData.append('imageUrl', this.state.input)
         formData.append('imageData', this.state.imageData)
         this.setState({spinner: true});
 
-        fetch('http://localhost:3001/imageurl', {
+        fetch('https://smartbrainappbackend.onrender.com/imageurl', {
             method: 'post',
             body: formData
         })
@@ -139,16 +137,14 @@ class App extends Component {
             .then(response => {
                 if (response.status.description === "Ok") {
                     this.DisplayFaceBox(this.Coordinates(response))
-                    fetch('http://localhost:3001/image', {
+                    fetch('https://smartbrainappbackend.onrender.com/image', {
                         method: 'put',
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify({
                             id: this.state.user.id
                         })
-                    })
-                        .then(res => res.json())
+                    }).then(res => res.json())
                         .then(count => {
-                            console.log("count fun");
                             this.setState(Object.assign(this.state.user, {entries: count.entries}));
                         })
                 }
@@ -161,7 +157,6 @@ class App extends Component {
                 console.log(error + 'error');
                 this.setState({spinner: false})
             })
-        console.log("END onButtonSubmit")
     }
 
     onRouteChange = (route) => {
@@ -177,7 +172,6 @@ class App extends Component {
     render() {
         const {isSignedIn, box, route, imageUrl, imagePath, message, spinner} = this.state;
         const {name, entries} = this.state.user;
-        console.log("imageUrl render ", {imageUrl})
         return (
             <div className="App">
                 <ParticlesBg type="cobweb" num={100} bg={true} v={800} color="#EEEEEE"/>
@@ -199,7 +193,6 @@ class App extends Component {
                             onButtonSubmit={this.onButtonSubmit}
                             image64code={this.image64code}
                             exampleImageUrl={this.exampleImageUrl}
-                            imageUrl ={imageUrl}
                         />
                         <Spinner spinnerState={spinner}/>
                         <FaceRecognition box={box} imageUrl={imageUrl} imagePath={imagePath}/>
