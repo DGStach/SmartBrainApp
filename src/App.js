@@ -9,7 +9,6 @@ import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import Signin from "./components/Signin/Signin";
 import Register from "./components/Register/Register";
 import Spinner from "./components/Spinner/Spinner"
-import faceRecognition from "./components/FaceRecognition/FaceRecognition";
 
 const initialState = {
     input: '',
