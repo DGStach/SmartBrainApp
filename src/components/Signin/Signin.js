@@ -9,8 +9,8 @@ class Signin extends React.Component {
             signInEmail: "",
             signInPassword: "",
             spinner: false,
-            signInEmailGuess: "Dagmarka1@wp.pl",
-            signInPasswordGuess: "Dagmarka1@wp.pl"
+            signInEmailGuess: "Guess@gmail.com",
+            signInPasswordGuess: "Guess@gmail.com"
         }
     }
 
