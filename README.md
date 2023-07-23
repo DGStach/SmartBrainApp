@@ -10,3 +10,14 @@ Użytkowanik po zalogowaniu może załadować zdjęcie:
 - robiąc je aparatem po wybraniu przycisku  "chose png/jpg file".
   
 Po naciśnięciu przycisku "DETECT" aplikacja komunikuje się z Servisem Clarifai i uzyskuje koordynaty wykrytych twarzy za pomocą wytrenowanego modelu w serwisie. Następnie aplikacja zaznacza twarze, dzięki nadesłanym koordynatom.
+
+Do zalet typu User Friendly należy:
+- pamięć sesji użytkownika
+- możliwość podglądnięcia hasła podczas jego wprowadzania
+- wskazówki podczas tworzenia konta użytkownika w formularzu rejestracyjnym
+- spinner
+- responsywny wygląd dla różnych rozdzielczości
+
+Do zalet typu seciurity należy:
+- brak klucza oraz Id użytkownika z Servisu Califarii na froncie 
+- haszowanie hasła na backendzie za pomocą bcrypt hashSync
