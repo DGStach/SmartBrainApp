@@ -27,10 +27,7 @@ class Signin extends React.Component {
         this.setState({spinner: true});
         let a = new Date()
 
-/*
         fetch('https://smartbrainappbackend.onrender.com/signin', {
-*/
-        fetch('http://localhost:3001/signin', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
@@ -75,6 +72,7 @@ class Signin extends React.Component {
                         <div>
                             <input
                                 onClick={() => {
+                                    console.log("Sign in Button Clicked");
                                     this.onSubmitSignIn({
                                         email: signInEmail,
                                         password: signInPassword
@@ -86,10 +84,13 @@ class Signin extends React.Component {
                         </div>
                         <div>
                             <input
-                                onClick={() => this.onSubmitSignIn({
+                                onClick={() => {
+                                    console.log("Sign in Guess Button Clicked");
+                                    this.onSubmitSignIn({
                                     email: signInEmailGuess,
                                     password: signInPasswordGuess
-                                })}
+                                })
+                            }}
                                 className="b mt2 ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                                 type="button"
                                 value="Login as Guess"/>

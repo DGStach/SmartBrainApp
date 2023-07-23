@@ -36,7 +36,7 @@ class Register extends React.Component {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                email: "Guess@gmail.com",
+                email:"Guess@gmail.com",
                 password: "Guess@gmail.com"
             })
         })
@@ -45,6 +45,7 @@ class Register extends React.Component {
                 let b = new Date()
                 console.log("duration", a-b)
                 if (user.id) {
+                    console.log("user full data", user)
                     this.props.loadUser(user)
                     this.setState({spinner: false});
                     this.props.onRouteChange('home')
@@ -155,7 +156,7 @@ class Register extends React.Component {
                         </div>
                         <div>
                             <input
-                                onClick={this.onSubmitSignInGuess}
+                                onClick={()=>{console.log("Register Form Login Button Clicked"); this.onSubmitSignInGuess()}}
                                 className="b mt2 ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                                 type="button"
                                 value="Login as Guess"/>
