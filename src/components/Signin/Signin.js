@@ -27,7 +27,10 @@ class Signin extends React.Component {
         this.setState({spinner: true});
         let a = new Date()
 
+/*
         fetch('https://smartbrainappbackend.onrender.com/signin', {
+*/
+        fetch('http://localhost:3001/signin', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
@@ -98,6 +101,8 @@ class Signin extends React.Component {
                             }}
                                className="f6 link dim black db pointer">Register</p>
                         </div>
+                        <div>First Login takes a long time</div>
+                        <div>We are working on it :)</div>
                     </form>
                 </main>
             </article>
