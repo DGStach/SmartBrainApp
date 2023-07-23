@@ -9,7 +9,7 @@ Użytkowanik po zalogowaniu może załadować zdjęcie:
 - używając gotowych przykładów, klikając na przycisk "use link"
 - robiąc je aparatem po wybraniu przycisku  "chose png/jpg file".
   
-Po naciśnięciu przycisku "DETECT" aplikacja komunikuje się z Servisem Clarifai i uzyskuje koordynaty wykrytych twarzy za pomocą wytrenowanego modelu w serwisie. Następnie aplikacja zaznacza twarze, dzięki nadesłanym koordynatom.
+Po naciśnięciu przycisku "DETECT" aplikacja komunikuje się z Servisem Clarifai i uzyskuje koordynaty wykrytych twarzy za pomocą wytrenowanego modelu w serwisie. Następnie aplikacja zaznacza twarze i zwiększa licznik wykorzystania aplikacji przez aktualnego użytkownika. 
 
 Do zalet typu User Friendly należy:
 - pamięć sesji użytkownika
