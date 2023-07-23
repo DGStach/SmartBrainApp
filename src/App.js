@@ -16,7 +16,7 @@ const initialState = {
     imagePath: '',
     box: [],
     imageData: {},
-    route: 'signin',
+    route: 'register',
     isSignedIn: false, // true or false
     login: "", //  'signout' or empty ""
     message:"",
@@ -159,7 +159,7 @@ class App extends Component {
     }
 
     onRouteChange = (route) => {
-        if (route === 'signin') {
+        if (route === 'register') {
             this.setState(initialState)
         }
         this.setState({isSignedIn: false, route: route});
@@ -196,7 +196,7 @@ class App extends Component {
                         <Spinner spinnerState={spinner}/>
                         <FaceRecognition box={box} imageUrl={imageUrl} imagePath={imagePath}/>
                     </div>
-                    : (route === 'signin'
+                    : (route === 'register'
                             ?  <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
                             : <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
                     )}

@@ -161,9 +161,6 @@ class Register extends React.Component {
                                 type="button"
                                 value="Login as Guess"/>
                         </div>
-                        <br/><br/>
-                        <div>First Login takes a long time</div>
-                           <div>We are working on it :)</div>
                     </form>
                 </main>
             </article>

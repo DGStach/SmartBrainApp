@@ -6,8 +6,6 @@ const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code, exampleImage
     let link1 = "https://raw.githubusercontent.com/DGStach/smartBrainAppFrontend/master/public/people.jpeg";
     let link2 = "https://identity-mag.com/wp-content/uploads/2017/04/concert-audience-fans-at-a-concert-o.jpg";
     let link3 = "https://media1.popsugar-assets.com/files/thumbor/6TyTdApcuH5wEB0tNCS2W1FBsfg/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2020/03/10/740/n/24155406/17e998b8008adf20_GettyImages-1132179376/i/angelina-jolie-brad-pitt-kids.jpg";
-    let link4 = "https://raw.githubusercontent.com/DGStach/smartBrainAppBackend/master/controllers/a.png";
-    let link5 = "https://www.intouchweekly.com/wp-content/uploads/2022/09/Angelina-Jolie-Allegedly-Tipped-Off-Photographer-About-1st-Pics-With-Brad-Pitt-After-Jennifer-Aniston-Split-.jpg?crop=0px%2C0px%2C2400px%2C1359px&resize=1920%2C1080&quality=86&strip=all";
 
     const photoHttp = document.getElementById("photoHttp");
 
@@ -54,18 +52,6 @@ const ImageLinkForm = ({onInputChange, onButtonSubmit, image64code, exampleImage
                     <div onClick={() => {
                         exampleImageUrl(link3);
                         photoHttp.value = link3
-                    }}>
-                        <UseLink/>
-                    </div>
-                    <div onClick={() => {
-                        exampleImageUrl(link4);
-                        photoHttp.value = link4
-                    }}>
-                        <UseLink/>
-                    </div>
-                    <div onClick={() => {
-                        exampleImageUrl(link5);
-                        photoHttp.value = link5
                     }}>
                         <UseLink/>
                     </div>

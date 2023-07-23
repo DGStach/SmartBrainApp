@@ -23,14 +23,16 @@ class Signin extends React.Component {
     }
 
     onSubmitSignIn = (data) => {
-
         this.setState({spinner: true});
         let a = new Date()
 
         fetch('https://smartbrainappbackend.onrender.com/signin', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(data)
+            body: JSON.stringify({
+                email: this.state.signInEmail,
+                password: this.state.signInPassword
+            })
         })
             .then(res => res.json())
             .then(user => {
@@ -71,29 +73,10 @@ class Signin extends React.Component {
                         <Spinner spinnerState={spinner}/>
                         <div>
                             <input
-                                onClick={() => {
-                                    console.log("Sign in Button Clicked");
-                                    this.onSubmitSignIn({
-                                        email: signInEmail,
-                                        password: signInPassword
-                                    })
-                                }}
+                                onClick={()=> this.onSubmitSignIn()}
                                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                                 type="button"
                                 value="Sign in"/>
-                        </div>
-                        <div>
-                            <input
-                                onClick={() => {
-                                    console.log("Sign in Guess Button Clicked");
-                                    this.onSubmitSignIn({
-                                    email: signInEmailGuess,
-                                    password: signInPasswordGuess
-                                })
-                            }}
-                                className="b mt2 ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
-                                type="button"
-                                value="Login as Guess"/>
                         </div>
                         <i className="fa fa-eye-slash" aria-hidden="false"></i>
                         <div className="lh-copy mt3">
@@ -102,8 +85,6 @@ class Signin extends React.Component {
                             }}
                                className="f6 link dim black db pointer">Register</p>
                         </div>
-                        <div>First Login takes a long time</div>
-                        <div>We are working on it :)</div>
                     </form>
                 </main>
             </article>
