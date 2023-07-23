@@ -9,4 +9,4 @@ Użytkowanik po zalogowaniu może załadować zdjęcie:
 - używając gotowych przykładów, klikając na przycisk "use link"
 - robiąc je aparatem po wybraniu przycisku  "chose png/jpg file".
   
-Następnie po naciśnięciu przycisku "DETECT" aplikacja komunikuje się z Servisem Clarifai i uzyskuje koordynaty wykrytych twarzy za pomocą wytrenowanego modelu w serwisie. Aplikacja zaznacza twarze, dzięki nadesłanym koordynatom.
+Następnie po naciśnięciu przycisku "DETECT" aplikacja komunikuje się z Servisem Clarifai i uzyskuje koordynaty wykrytych twarzy za pomocą wytrenowanego modelu w serwisie. Następnie aplikacja zaznacza twarze, dzięki nadesłanym koordynatom.
