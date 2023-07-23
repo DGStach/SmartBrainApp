@@ -21,3 +21,4 @@ Do zalet typu User Friendly należy:
 Do zalet typu seciurity należy:
 - brak klucza oraz Id użytkownika z Servisu Califarii na froncie 
 - haszowanie hasła na backendzie za pomocą bcrypt hashSync
+- wymagania stawiane użytkownikowi dotyczące jakości wprowadzanego hasła 
