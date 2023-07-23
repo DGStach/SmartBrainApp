@@ -156,7 +156,7 @@ class Register extends React.Component {
                         </div>
                         <div>
                             <input
-                                onClick={()=>{console.log("Register Form Login Button Clicked"); this.onSubmitSignInGuess()}}
+                                onClick={()=>{this.onSubmitSignInGuess()}}
                                 className="b mt2 ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                                 type="button"
                                 value="Login as Guess"/>
